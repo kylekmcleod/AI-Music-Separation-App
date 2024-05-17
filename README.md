@@ -16,6 +16,8 @@ Welcome to my music splitter project! This application enables you to separate m
 4. **Download and Edit**: Once the separation is complete, download the individual stems and adjust their volumes or remix them as desired.
 
 ## Running the project
-1. Right click **client** folder and Open in Integrated Terminal. Type ```npm start```.
-2. Right click **server** folder and Open in Integrated Terminal. Type ```npm start```.
-3. Open your web browser and navigate to http://localhost:3000.
+1. Right click **client** folder and Open in Integrated Terminal. Type ```npm install``` to install dependencies.
+2. Right click **server** folder and Open in Integrated Terminal. Type ```npm install``` to install dependencies.
+3. Right click **client** folder and Open in Integrated Terminal. Type ```npm start```.
+4. Right click **server** folder and Open in Integrated Terminal. Type ```npm start```.
+5. Open your web browser and navigate to http://localhost:3000.
