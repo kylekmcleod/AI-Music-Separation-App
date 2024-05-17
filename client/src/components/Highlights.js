@@ -15,39 +15,39 @@ import ThumbUpAltRoundedIcon from '@mui/icons-material/ThumbUpAltRounded';
 const items = [
   {
     icon: <SettingsSuggestRoundedIcon />,
-    title: 'Adaptable performance',
+    title: 'Versatile Audio Splitting',
     description:
-      'Our product effortlessly adjusts to your needs, boosting efficiency and simplifying your tasks.',
+      'Seamlessly divide and isolate audio tracks according to your preferences, empowering precise control and customization of your sound.',
   },
   {
     icon: <ConstructionRoundedIcon />,
-    title: 'Built to last',
+    title: 'Enduring Performance Engine',
     description:
-      'Experience unmatched durability that goes above and beyond with lasting investment.',
+      'Harness the enduring power of our software, ensuring consistent, reliable performance that withstands the test of time for enduring value.',
   },
   {
     icon: <ThumbUpAltRoundedIcon />,
-    title: 'Great user experience',
+    title: 'Intuitive User Interface',
     description:
-      'Integrate our product into your routine with an intuitive and easy-to-use interface.',
+      "Navigate effortlessly through our software's user-friendly interface, designed for intuitive operation and seamless integration into your workflow.",
   },
   {
     icon: <AutoFixHighRoundedIcon />,
-    title: 'Innovative functionality',
+    title: 'Cutting-Edge Audio Engineering',
     description:
-      'Stay ahead with features that set new standards, addressing your evolving needs better than the rest.',
+      'Explore innovative audio manipulation features that redefine industry standards, offering unparalleled versatility and creative freedom.',
   },
   {
     icon: <SupportAgentRoundedIcon />,
-    title: 'Reliable support',
+    title: 'Responsive Customer Assistance',
     description:
-      'Count on our responsive customer support, offering assistance that goes beyond the purchase.',
+      "Access expert assistance and responsive support whenever you need it, ensuring smooth operation and maximizing your software's potential.",
   },
   {
     icon: <QueryStatsRoundedIcon />,
-    title: 'Precision in every detail',
+    title: 'Exquisite Detailing for Audiophiles',
     description:
-      'Enjoy a meticulously crafted product where small touches make a significant impact on your overall experience.',
+      'Delve into the intricacies of sound with meticulously crafted software, where every detail is finely tuned to deliver an immersive audio experience.',
   },
 ];
 
@@ -78,12 +78,10 @@ export default function Highlights() {
           }}
         >
           <Typography component="h2" variant="h4">
-            Highlights
+            Why us?
           </Typography>
           <Typography variant="body1" sx={{ color: 'grey.400' }}>
-            Explore why our product stands out: adaptability, durability,
-            user-friendly design, and innovation. Enjoy reliable customer support and
-            precision in every detail.
+          Uncover the essence of our app: adaptability, resilience, user-centric design, and cutting-edge innovation. Access dependable customer support and precision engineering in every feature.
           </Typography>
         </Box>
         <Grid container spacing={2.5}>
