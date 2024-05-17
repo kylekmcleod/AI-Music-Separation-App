@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import LandingPage from './components/LandingPage';
 
 function App() {
 
@@ -17,16 +18,7 @@ function App() {
 
   return (
     <div>
-      <h1>React App</h1>
-
-      {(typeof backendData.users === 'undefined') ? (
-        <p>Loading...</p>
-      ): (
-        backendData.users.map((user, i) => (
-          <p key={i}>{user}</p>
-        ))
-      )}
-
+      <LandingPage />
     </div>
   );
 }
