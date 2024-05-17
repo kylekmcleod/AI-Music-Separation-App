@@ -51,19 +51,16 @@ export default function FAQ() {
             id="panel1d-header"
           >
             <Typography component="h3" variant="subtitle2">
-              How do I contact customer support if I have a question or issue?
+            Is the Music Splitter free?
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
             <Typography
-              variant="body2"
+              variant="body3"
               gutterBottom
-              sx={{ maxWidth: { sm: '100%', md: '70%' } }}
+              sx={{ maxWidth: { sm: '100%', md: '70%' },  color: 'text.secondary' }}
             >
-              You can reach our customer support team by emailing
-              <Link> support@email.com </Link>
-              or calling our toll-free number. We&apos;re here to assist you
-              promptly.
+              Yes, the Music Splitter feature is available for free, allowing users to separate mixed audio tracks into individual components. However, each user account comes with a limited number of credits. These credits are used for accessing premium features or for additional usage beyond the free tier. For more details on credit usage and premium features, please refer to our pricing page.
             </Typography>
           </AccordionDetails>
         </Accordion>
@@ -77,18 +74,16 @@ export default function FAQ() {
             id="panel2d-header"
           >
             <Typography component="h3" variant="subtitle2">
-              Can I return the product if it doesn&apos;t meet my expectations?
+            What are audio stems?
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
             <Typography
-              variant="body2"
+              variant="body3"
               gutterBottom
-              sx={{ maxWidth: { sm: '100%', md: '70%' } }}
+              sx={{ maxWidth: { sm: '100%', md: '70%' },  color: 'text.secondary' }}
             >
-              Absolutely! We offer a hassle-free return policy. If you&apos;re not
-              completely satisfied, you can return the product within [number of
-              days] days for a full refund or exchange.
+              Audio stems are individual tracks or components that constitute a mixed audio recording. For instance, in a music track, stems could include separate files for vocals, drums, bass, guitar, and other instruments. These stems enable users to manipulate and edit specific elements of the audio independently, offering greater flexibility in audio production and remixing.
             </Typography>
           </AccordionDetails>
         </Accordion>
@@ -102,44 +97,16 @@ export default function FAQ() {
             id="panel3d-header"
           >
             <Typography component="h3" variant="subtitle2">
-              What makes your product stand out from others in the market?
+            What audio formats are accepted?
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
             <Typography
-              variant="body2"
+              variant="body3"
               gutterBottom
-              sx={{ maxWidth: { sm: '100%', md: '70%' } }}
+              sx={{ maxWidth: { sm: '100%', md: '70%' },  color: 'text.secondary' }}
             >
-              Our product distinguishes itself through its adaptability, durability,
-              and innovative features. We prioritize user satisfaction and
-              continually strive to exceed expectations in every aspect.
-            </Typography>
-          </AccordionDetails>
-        </Accordion>
-        <Accordion
-          expanded={expanded === 'panel4'}
-          onChange={handleChange('panel4')}
-        >
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel4d-content"
-            id="panel4d-header"
-          >
-            <Typography component="h3" variant="subtitle2">
-              Is there a warranty on the product, and what does it cover?
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography
-              variant="body2"
-              gutterBottom
-              sx={{ maxWidth: { sm: '100%', md: '70%' } }}
-            >
-              Yes, our product comes with a [length of warranty] warranty. It covers
-              defects in materials and workmanship. If you encounter any issues
-              covered by the warranty, please contact our customer support for
-              assistance.
+              Our platform supports a variety of common audio formats, ensuring compatibility with most audio processing software and services. Accepted formats include MP3, WAV, FLAC, AIFF, and others. Should you encounter any compatibility issues or have specific format requirements, please reach out to our support team for assistance.
             </Typography>
           </AccordionDetails>
         </Accordion>

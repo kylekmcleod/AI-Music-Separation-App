@@ -16,25 +16,25 @@ import ViewQuiltRoundedIcon from '@mui/icons-material/ViewQuiltRounded';
 const items = [
   {
     icon: <ViewQuiltRoundedIcon />,
-    title: 'Dashboard',
+    title: 'Music Stem Separation',
     description:
-      'This item could provide a snapshot of the most important metrics or data points related to the product.',
+      'Experience the magic of music stem separation, allowing users to isolate vocals, drums, bass, and other elements from any song. Unlock new creative possibilities by remixing and rearranging tracks like never before.',
     imageLight: 'url("/static/images/templates/templates-images/dash-light.png")',
     imageDark: 'url("/static/images/templates/templates-images/dash-dark.png")',
   },
   {
     icon: <EdgesensorHighRoundedIcon />,
-    title: 'Mobile integration',
+    title: 'Real-time Playback Control',
     description:
-      'This item could provide information about the mobile app version of the product.',
+      'Take full control of your music with real-time playback adjustments. Adjust tempo, pitch, and volume on the fly to match your mood or performance needs. Explore endless variations and create unique sounds effortlessly.',
     imageLight: 'url("/static/images/templates/templates-images/mobile-light.png")',
     imageDark: 'url("/static/images/templates/templates-images/mobile-dark.png")',
   },
   {
     icon: <DevicesRoundedIcon />,
-    title: 'Available on all platforms',
+    title: 'Intuitive Interface',
     description:
-      'This item could let users know the product is available on all platforms, such as web, mobile, and desktop.',
+      'Enjoy a user-friendly interface designed for musicians of all skill levels. Navigate effortlessly through your music library, apply effects, and manipulate stems with ease. Spend less time learning and more time creating.',
     imageLight: 'url("/static/images/templates/templates-images/devices-light.png")',
     imageDark: 'url("/static/images/templates/templates-images/devices-dark.png")',
   },
@@ -55,16 +55,14 @@ export default function Features() {
         <Grid item xs={12} md={6}>
           <div>
             <Typography component="h2" variant="h4" color="text.primary">
-              Product features
+              Our music splitter features
             </Typography>
             <Typography
               variant="body1"
               color="text.secondary"
               sx={{ mb: { xs: 2, sm: 4 } }}
             >
-              Here you can provide a brief overview of the key features of the
-              product. For example, you could list the number of features, the types
-              of features, add-ons, or the benefits of the features.
+              What does our music splitter have to offer?
             </Typography>
           </div>
           <Grid container item gap={1} sx={{ display: { xs: 'auto', sm: 'none' } }}>

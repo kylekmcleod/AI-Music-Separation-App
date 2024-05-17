@@ -62,9 +62,9 @@ function AppAppBar({ mode, toggleColorMode }) {
               borderRadius: '999px',
               bgcolor:
                 theme.palette.mode === 'light'
-                  ? 'rgba(255, 255, 255, 0.4)'
-                  : 'rgba(0, 0, 0, 0.4)',
-              backdropFilter: 'blur(24px)',
+                  ? 'rgba(255, 255, 255, 1)'
+                  : 'rgba(0, 0, 0, 0.8)',
+              backdropFilter: 'blur(14px)',
               maxHeight: 40,
               border: '1px solid',
               borderColor: 'divider',
@@ -92,27 +92,19 @@ function AppAppBar({ mode, toggleColorMode }) {
               />
               <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
                 <MenuItem
-                  onClick={() => scrollToSection('features')}
+                  onClick={() => scrollToSection('Home')}
                   sx={{ py: '6px', px: '12px' }}
                 >
                   <Typography variant="body2" color="text.primary">
-                    Features
+                    Home
                   </Typography>
                 </MenuItem>
                 <MenuItem
-                  onClick={() => scrollToSection('testimonials')}
+                  onClick={() => scrollToSection('')}
                   sx={{ py: '6px', px: '12px' }}
                 >
                   <Typography variant="body2" color="text.primary">
-                    Testimonials
-                  </Typography>
-                </MenuItem>
-                <MenuItem
-                  onClick={() => scrollToSection('highlights')}
-                  sx={{ py: '6px', px: '12px' }}
-                >
-                  <Typography variant="body2" color="text.primary">
-                    Highlights
+                    About
                   </Typography>
                 </MenuItem>
                 <MenuItem
@@ -158,6 +150,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                 component="a"
                 href="/material-ui/getting-started/templates/sign-up/"
                 target="_blank"
+                
               >
                 Sign up
               </Button>
