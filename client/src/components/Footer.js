@@ -21,7 +21,7 @@ function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary" mt={1}>
       {'Copyright © '}
-      <Link href="https://mui.com/">Sitemark&nbsp;</Link>
+      <Link href="https://mui.com/">Kyle McLeod&nbsp;</Link>
       {new Date().getFullYear()}
     </Typography>
   );
@@ -105,9 +105,6 @@ export default function Footer() {
             Features
           </Link>
           <Link color="text.secondary" href="#">
-            Testimonials
-          </Link>
-          <Link color="text.secondary" href="#">
             Highlights
           </Link>
           <Link color="text.secondary" href="#">
@@ -130,12 +127,6 @@ export default function Footer() {
           <Link color="text.secondary" href="#">
             About us
           </Link>
-          <Link color="text.secondary" href="#">
-            Careers
-          </Link>
-          <Link color="text.secondary" href="#">
-            Press
-          </Link>
         </Box>
         <Box
           sx={{
@@ -147,10 +138,10 @@ export default function Footer() {
           <Typography variant="body2" fontWeight={600}>
             Legal
           </Typography>
-          <Link color="text.secondary" href="#">
+          <Link color="text.secondary" href="/terms-of-service">
             Terms
           </Link>
-          <Link color="text.secondary" href="#">
+          <Link color="text.secondary" href="privacy-policy">
             Privacy
           </Link>
           <Link color="text.secondary" href="#">
@@ -169,13 +160,13 @@ export default function Footer() {
         }}
       >
         <div>
-          <Link color="text.secondary" href="#">
+          <Link color="text.secondary" href="privacy-policy">
             Privacy Policy
           </Link>
           <Typography display="inline" sx={{ mx: 0.5, opacity: 0.5 }}>
             &nbsp;•&nbsp;
           </Typography>
-          <Link color="text.secondary" href="#">
+          <Link color="text.secondary" href="/terms-of-service">
             Terms of Service
           </Link>
           <Copyright />
