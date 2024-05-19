@@ -8,7 +8,7 @@ export const brand = {
   300: '#55A6F6',
   400: '#0A66C2',
   500: '#0959AA',
-  600: '#064079',
+  600: '#0959AA',
   700: '#033363',
   800: '#02294F',
   900: '#021F3B',
@@ -300,7 +300,6 @@ export default function getLPTheme(mode) {
                 background: brand[500],
                 backgroundImage: `linear-gradient(to bottom, ${brand[400]}, ${brand[600]})`,
                 boxShadow: `inset 0 1px ${alpha(brand[300], 0.4)}`,
-                outline: `1px solid ${brand[700]}`,
                 '&:hover': {
                   background: brand[400],
                   backgroundImage: 'none',
