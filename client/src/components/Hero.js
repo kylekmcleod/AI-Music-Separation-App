@@ -62,9 +62,9 @@ export default function Hero() {
         backgroundSize: '100% 100%',
         backgroundRepeat: 'no-repeat',
         border: '2px dashed',
-        borderColor: dragging ? '#3f51b5' : 'transparent', // Always present border
-        transition: 'background-color 0.3s ease', // Smooth transition for background color change
-        backgroundColor: dragging ? alpha('#000', 0.7) : 'transparent', // Darken background on drag
+        borderColor: dragging ? '#3f51b5' : 'transparent',
+        transition: 'background-color 0.3s ease',
+        backgroundColor: dragging ? alpha('#000', 0.7) : 'transparent',
       }}
     >
       <Container
