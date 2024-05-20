@@ -1,5 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
+import { useTheme } from '@mui/material/styles';
 
 import Box from '@mui/material/Box';
 import AppBar from '@mui/material/AppBar';
@@ -21,6 +22,8 @@ const logoStyle = {
 
 function AppAppBar({ mode, toggleColorMode }) {
   const [open, setOpen] = React.useState(false);
+  const theme = useTheme();
+
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
@@ -68,10 +71,6 @@ function AppAppBar({ mode, toggleColorMode }) {
               maxHeight: 40,
               border: '1px solid',
               borderColor: 'divider',
-              boxShadow:
-                theme.palette.mode === 'light'
-                  ? `0 0 1px rgba(85, 166, 246, 0.1), 1px 1.5px 2px -1px rgba(85, 166, 246, 0.15), 4px 4px 12px -2.5px rgba(85, 166, 246, 0.15)`
-                  : '0 0 1px rgba(2, 31, 59, 0.7), 1px 1.5px 2px -1px rgba(2, 31, 59, 0.65), 4px 4px 12px -2.5px rgba(2, 31, 59, 0.65)',
             })}
           >
             <Box
@@ -79,15 +78,17 @@ function AppAppBar({ mode, toggleColorMode }) {
                 flexGrow: 1,
                 display: 'flex',
                 alignItems: 'center',
-                ml: '-18px',
+                ml: '0px',
                 px: 0,
               }}
             >
               <img
                 src={
-                  'https://assets-global.website-files.com/61ed56ae9da9fd7e0ef0a967/61f12e6faf73568658154dae_SitemarkDefault.svg'
+                  theme.palette.mode === 'light'
+                    ? 'https://i.ibb.co/BPJBPCr/Group-2.png'
+                    : 'https://i.ibb.co/F0NL3Rh/Group-1.png'
                 }
-                style={logoStyle}
+                style={{...logoStyle, marginRight: '10px', marginTop: '-4px'}}
                 alt="logo of sitemark"
               />
               <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
@@ -205,7 +206,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                       component="a"
                       href="/material-ui/getting-started/templates/sign-up/"
                       target="_blank"
-                      sx={{ width: '100%' }}
+                      sx={{ width: '100%'}}
                     >
                       Sign up
                     </Button>

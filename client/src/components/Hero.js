@@ -8,9 +8,11 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import logo from '../images/stems.png';
 
+import { useTheme } from '@mui/material/styles';
+
 export default function Hero() {
   const [dragging, setDragging] = React.useState(false);
-
+  const theme = useTheme();
   const handleFileChange = (files) => {
     const file = files[0];
     if (file && (file.type === 'audio/mpeg' || file.type === 'audio/wav' || file.type === 'audio/flac')) {
@@ -57,14 +59,14 @@ export default function Hero() {
         width: '100%',
         backgroundImage: (theme) =>
           theme.palette.mode === 'light'
-            ? 'radial-gradient(circle, rgba(206, 229, 253, 0.9), rgba(255, 255, 255, 0.9))'
-            : 'radial-gradient(circle, rgba(2, 41, 79, 0.4), rgba(9, 14, 16, 0.9))',
+            ? ''
+            : '',
         backgroundSize: '100% 100%',
         backgroundRepeat: 'no-repeat',
         border: '2px dashed',
-        borderColor: dragging ? '#3f51b5' : 'transparent',
+        borderColor: dragging ? '#EF4A40' : 'transparent',
         transition: 'background-color 0.3s ease',
-        backgroundColor: dragging ? alpha('#000', 0.7) : 'transparent',
+        backgroundColor: dragging && theme.palette.mode === 'dark' ? alpha('#000', 0.7) : 'transparent',
       }}
     >
       <Container
