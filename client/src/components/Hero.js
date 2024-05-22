@@ -17,7 +17,19 @@ export default function Hero() {
     const file = files[0];
     if (file && (file.type === 'audio/mpeg' || file.type === 'audio/wav' || file.type === 'audio/flac')) {
       console.log('File uploaded:', file);
-      // Process the file here
+      const formData = new FormData();
+      formData.append('audioFile', file);
+  
+      fetch('http://localhost:5000/upload', { 
+        method: 'POST',
+        body: formData
+      }).then(response => response.json())
+        .then(data => {
+          console.log(data);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
     } else {
       alert('Only .mp3, .wav, and .flac files are allowed.');
     }
