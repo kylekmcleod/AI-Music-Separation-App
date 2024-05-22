@@ -10,7 +10,7 @@ import logo from '../images/stems.png';
 
 import { useTheme } from '@mui/material/styles';
 
-export default function Hero() {
+export default function UploadSection() {
   const [dragging, setDragging] = React.useState(false);
   const theme = useTheme();
   const handleFileChange = (files) => {

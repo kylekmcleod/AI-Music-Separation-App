@@ -7,7 +7,7 @@ import Divider from '@mui/material/Divider';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import AppAppBar from './AppAppBar';
-import Hero from './Hero';
+import UploadSection from './UploadSection';
 import Highlights from './Highlights';
 import Features from './Features';
 import FAQ from './FAQ';
@@ -68,7 +68,7 @@ export default function LandingPage() {
     <ThemeProvider theme={showCustomTheme ? LPtheme : defaultTheme}>
       <CssBaseline />
       <AppAppBar mode={mode} toggleColorMode={toggleColorMode} />
-      <Hero />
+      <UploadSection />
       <Box sx={{ bgcolor: 'background.default' }}>
         <Features />
         <Divider />
