@@ -106,7 +106,7 @@ export default function FAQ() {
               gutterBottom
               sx={{ maxWidth: { sm: '100%', md: '70%' },  color: 'text.secondary' }}
             >
-              Our platform supports a variety of common audio formats, ensuring compatibility with most audio processing software and services. Accepted formats include MP3, WAV, FLAC, AIFF, and others. Should you encounter any compatibility issues or have specific format requirements, please reach out to our support team for assistance.
+              Our platform supports a variety of common audio formats, ensuring compatibility with most audio processing software and services. Accepted formats include MP3, WAV, and FLAC. Should you encounter any compatibility issues or have specific format requirements, please reach out to our support team for assistance.
             </Typography>
           </AccordionDetails>
         </Accordion>
