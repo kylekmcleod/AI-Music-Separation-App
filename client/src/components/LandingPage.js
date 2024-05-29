@@ -13,6 +13,9 @@ import Features from './Features';
 import FAQ from './FAQ';
 import Footer from './Footer';
 import getLPTheme from './getLPTheme';
+import FileUploaded from './FileUploaded';
+import Button from '@mui/material/Button';
+import TrackPlayer from './TrackPlayer';
 
 const defaultTheme = createTheme({});
 
@@ -56,6 +59,9 @@ export default function LandingPage() {
   const [showCustomTheme, setShowCustomTheme] = React.useState(true);
   const LPtheme = createTheme(getLPTheme(mode));
 
+  const [isFileUploaded, setIsFileUploaded] = React.useState(false);
+  const [isDone, setIsDone] = React.useState(false);
+
   const toggleColorMode = () => {
     setMode((prev) => (prev === 'dark' ? 'light' : 'dark'));
   };
@@ -64,11 +70,30 @@ export default function LandingPage() {
     setShowCustomTheme((prev) => !prev);
   };
 
+  const resetComponents = () => {
+    setIsFileUploaded(false);
+    setIsDone(false);
+  };
+
+  const handleFileUpload = () => {
+    setIsFileUploaded(true);
+  };
+
+  const handleProcessingDone = (isDone) => {
+    setIsDone(isDone);
+  };
+  
   return (
     <ThemeProvider theme={showCustomTheme ? LPtheme : defaultTheme}>
       <CssBaseline />
       <AppAppBar mode={mode} toggleColorMode={toggleColorMode} />
-      <UploadSection />
+
+      {isFileUploaded ? (
+        isDone ? <TrackPlayer /> : <FileUploaded />
+      ) : (
+        <UploadSection onFileUpload={handleFileUpload} onProcessingDone={handleProcessingDone} />
+      )}
+
       <Box sx={{ bgcolor: 'background.default' }}>
         <Features />
         <Divider />
@@ -80,10 +105,12 @@ export default function LandingPage() {
         <Divider />
         <Footer />
       </Box>
+
       <ToggleCustomTheme
         showCustomTheme={showCustomTheme}
         toggleCustomTheme={toggleCustomTheme}
       />
+      <Button onClick={resetComponents}>Reset Components</Button>
     </ThemeProvider>
   );
 }

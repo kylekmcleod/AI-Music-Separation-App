@@ -10,13 +10,14 @@ import logo from '../images/stems.png';
 
 import { useTheme } from '@mui/material/styles';
 
-export default function UploadSection() {
+export default function UploadSection({onFileUpload, onProcessingDone}) {
   const [dragging, setDragging] = React.useState(false);
   const theme = useTheme();
   const handleFileChange = (files) => {
     const file = files[0];
     if (file && (file.type === 'audio/mpeg' || file.type === 'audio/wav' || file.type === 'audio/flac')) {
       console.log('File uploaded:', file);
+      onFileUpload();
       const formData = new FormData();
       formData.append('audioFile', file);
   
@@ -26,6 +27,7 @@ export default function UploadSection() {
       }).then(response => response.json())
         .then(data => {
           console.log(data);
+          onProcessingDone(data.isDone, data.files);
         })
         .catch(error => {
           console.error('Error:', error);
