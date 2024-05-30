@@ -34,18 +34,19 @@ export default function TrackPlayer({files}) {
       > 
         <Typography
           component="h4"
-          variant="body2"
+          variant="h4"
           sx={{
             display: 'flex',
-            flexDirection: { xs: 'column', md: 'row' },
+            flexDirection: { xs: 'column'},
             alignSelf: 'center',
             textAlign: 'center',
           }}
         >
-          <Button variant="contained" href={bass ? bass.url : '#'}sx={{ mr: 1 }}>Bass</Button>
-          <Button variant="contained" href={drums ? drums.url : '#'}sx={{ mr: 1 }}>Drums</Button>
-          <Button variant="contained" href={vocals ? vocals.url : '#'}sx={{ mr: 1 }}>Vocals</Button>
-          <Button variant="contained" href={other ? other.url : '#'}sx={{ mr: 1 }}>Instruments</Button>
+          Enjoy the individual tracks of your song:
+          <Button variant="contained" href={bass ? bass.url : '#'}sx={{mt: 1, mb: 1, mr: 1}}>Bass</Button>
+          <Button variant="contained" href={drums ? drums.url : '#'}sx={{mt: 1, mb: 1, mr: 1}}>Drums</Button>
+          <Button variant="contained" href={vocals ? vocals.url : '#'}sx={{mt: 1, mb: 1, mr: 1}}>Vocals</Button>
+          <Button variant="contained" href={other ? other.url : '#'}sx={{mt: 1, mb: 1, mr: 1}}>Instruments</Button>
         </Typography>
       </Container>
     </Box>
