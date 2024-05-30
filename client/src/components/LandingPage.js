@@ -61,6 +61,7 @@ export default function LandingPage() {
 
   const [isFileUploaded, setIsFileUploaded] = React.useState(false);
   const [isDone, setIsDone] = React.useState(false);
+  const [files, setFiles] = React.useState([]);
 
   const toggleColorMode = () => {
     setMode((prev) => (prev === 'dark' ? 'light' : 'dark'));
@@ -79,8 +80,9 @@ export default function LandingPage() {
     setIsFileUploaded(true);
   };
 
-  const handleProcessingDone = (isDone) => {
+  const handleProcessingDone = (isDone, files) => {
     setIsDone(isDone);
+    setFiles(files);
   };
   
   return (
@@ -89,13 +91,13 @@ export default function LandingPage() {
       <AppAppBar mode={mode} toggleColorMode={toggleColorMode} />
 
       {isFileUploaded ? (
-        isDone ? <TrackPlayer /> : <FileUploaded />
+        isDone ? <TrackPlayer files={files} /> : <FileUploaded />
       ) : (
         <UploadSection onFileUpload={handleFileUpload} onProcessingDone={handleProcessingDone} />
       )}
 
       <Box sx={{ bgcolor: 'background.default' }}>
-        <Features />
+        {/* <Features /> */}
         <Divider />
         <Divider />
         <Highlights />
