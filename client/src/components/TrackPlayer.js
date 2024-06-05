@@ -4,6 +4,7 @@ import Container from '@mui/material/Container';
 import { useTheme } from '@mui/material/styles';
 import { Typography } from '@mui/material';
 import Button from '@mui/material/Button';
+import WaveSurfer from 'wavesurfer.js';
 
 export default function TrackPlayer({files}) {
   const theme = useTheme();
@@ -12,6 +13,18 @@ export default function TrackPlayer({files}) {
   const drums = files.find(file => file.name === 'drums.wav');
   const vocals = files.find(file => file.name === 'vocals.wav');
   const other = files.find(file => file.name === 'other.wav');
+
+  const wavesurfer = WaveSurfer.create({
+    container: document.body,
+    waveColor: 'rgb(200, 0, 200)',
+    progressColor: 'rgb(100, 0, 100)',
+    url: drums.url,
+  })
+
+  wavesurfer.on('click', () => {
+    wavesurfer.play()
+  })
+
   return (
     <Box
       sx={{
@@ -48,6 +61,7 @@ export default function TrackPlayer({files}) {
           <Button variant="contained" href={vocals ? vocals.url : '#'}sx={{mt: 1, mb: 1, mr: 1}}>Vocals</Button>
           <Button variant="contained" href={other ? other.url : '#'}sx={{mt: 1, mb: 1, mr: 1}}>Instruments</Button>
         </Typography>
+        
       </Container>
     </Box>
   );

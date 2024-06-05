@@ -7,14 +7,8 @@ import Divider from '@mui/material/Divider';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import AppAppBar from './AppAppBar';
-import UploadSection from './UploadSection';
-import Highlights from './Highlights';
-import Features from './Features';
-import FAQ from './FAQ';
 import Footer from './Footer';
 import getLPTheme from './getLPTheme';
-import FileUploaded from './FileUploaded';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 
