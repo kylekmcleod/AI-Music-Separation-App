@@ -31,6 +31,10 @@ function AppAppBar({ mode, toggleColorMode }) {
 
   const scrollToSection = (sectionId) => {
     const sectionElement = document.getElementById(sectionId);
+    const currentPath = window.location.pathname;
+    if(currentPath !== '/') {
+      window.location.href = `/`;
+    }
     const offset = 128;
     if (sectionElement) {
       const targetScroll = sectionElement.offsetTop - offset;
@@ -82,6 +86,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                 px: 0,
               }}
             >
+              <a href="/" style={{ display: 'flex', alignItems: 'center' }}>
               <img
                 src={
                   theme.palette.mode === 'light'
@@ -91,29 +96,14 @@ function AppAppBar({ mode, toggleColorMode }) {
                 style={{...logoStyle, marginRight: '10px', marginTop: '-4px'}}
                 alt="logo of sitemark"
               />
+              </a>
               <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
                 <MenuItem
-                  onClick={() => scrollToSection('Home')}
-                  sx={{ py: '6px', px: '12px' }}
-                >
-                  <Typography variant="body2" color="text.primary">
-                    Home
-                  </Typography>
-                </MenuItem>
-                <MenuItem
-                  onClick={() => scrollToSection('features')}
+                  onClick={() => scrollToSection('highlights')}
                   sx={{ py: '6px', px: '12px' }}
                 >
                   <Typography variant="body2" color="text.primary">
                     About
-                  </Typography>
-                </MenuItem>
-                <MenuItem
-                  onClick={() => scrollToSection('pricing')}
-                  sx={{ py: '6px', px: '12px' }}
-                >
-                  <Typography variant="body2" color="text.primary">
-                    Pricing
                   </Typography>
                 </MenuItem>
                 <MenuItem
@@ -139,7 +129,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                 variant="text"
                 size="small"
                 component="a"
-                href="/material-ui/getting-started/templates/sign-in/"
+                href="/sign-in/"
                 target="_blank"
               >
                 Sign in
@@ -149,7 +139,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                 variant="contained"
                 size="small"
                 component="a"
-                href="/material-ui/getting-started/templates/sign-up/"
+                href="/sign-up/"
                 target="_blank"
                 
               >
@@ -204,7 +194,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                       color="primary"
                       variant="contained"
                       component="a"
-                      href="/material-ui/getting-started/templates/sign-up/"
+                      href="/sign-up/"
                       target="_blank"
                       sx={{ width: '100%'}}
                     >
@@ -216,7 +206,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                       color="primary"
                       variant="outlined"
                       component="a"
-                      href="/material-ui/getting-started/templates/sign-in/"
+                      href="/sign-in/"
                       target="_blank"
                       sx={{ width: '100%' }}
                     >

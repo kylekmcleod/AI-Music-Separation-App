@@ -17,37 +17,19 @@ const items = [
     icon: <SettingsSuggestRoundedIcon />,
     title: 'Versatile Audio Splitting',
     description:
-      'Seamlessly divide and isolate audio tracks according to your preferences, empowering precise control and customization of your sound.',
+      'Seamlessly divide and isolate audio tracks. Use the stem files for remixing, sampling, or karaoke.',
   },
   {
-    icon: <ConstructionRoundedIcon />,
+    icon: <AutoFixHighRoundedIcon />,
     title: 'Enduring Performance Engine',
     description:
-      'Harness the enduring power of our software, ensuring consistent, reliable performance that withstands the test of time for enduring value.',
+      'Powered by AI-powered algorithms. Our model is designed to deliver consistent and reliable results.',
   },
   {
     icon: <ThumbUpAltRoundedIcon />,
     title: 'Intuitive User Interface',
     description:
-      "Navigate effortlessly through our software's user-friendly interface, designed for intuitive operation and seamless integration into your workflow.",
-  },
-  {
-    icon: <AutoFixHighRoundedIcon />,
-    title: 'Cutting-Edge Audio Engineering',
-    description:
-      'Explore innovative audio manipulation features that redefine industry standards, offering unparalleled versatility and creative freedom.',
-  },
-  {
-    icon: <SupportAgentRoundedIcon />,
-    title: 'Responsive Customer Assistance',
-    description:
-      "Access expert assistance and responsive support whenever you need it, ensuring smooth operation and maximizing your software's potential.",
-  },
-  {
-    icon: <QueryStatsRoundedIcon />,
-    title: 'Exquisite Detailing for Audiophiles',
-    description:
-      'Delve into the intricacies of sound with meticulously crafted software, where every detail is finely tuned to deliver an immersive audio experience.',
+      "Navigate effortlessly through our software's user-friendly interface.",
   },
 ];
 
@@ -78,10 +60,10 @@ export default function Highlights() {
           }}
         >
           <Typography component="h2" variant="h4">
-            Why us?
+          About
           </Typography>
           <Typography variant="body1" sx={{ color: 'grey.400' }}>
-          Uncover the essence of our app: adaptability, resilience, user-centric design, and cutting-edge innovation. Access dependable customer support and precision engineering in every feature.
+          Song Seperator allows you to seamlessly extract stem files from your favorite songs. The model will return the vocal, instrumental, drums, and bass stems from the song.
           </Typography>
         </Box>
         <Grid container spacing={2.5}>
