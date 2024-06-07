@@ -1,19 +1,11 @@
 # AI-Powered Music Separator
-Welcome to SongSeperator! This application enables you to separate music into individual streams such as vocals, bass, percussion, and more. With this tool, you can download the individual layers of any song to use for your own music projects, remixes, or analysis.
-
-## Features
-- **AI-Driven Stem Separation**: Utilizes advanced Spleeter algorithms to dissect audio into individual components with extreme accuracy.
-- **User-Friendly Interface**: Easy-to-use interface for uploading audio files and selecting elements to isolate.
-- **Creative Control**: Extracted components grant you the creative freedom to modify, remix, and share your creations.
-- **Support for Various Audio Formats**: Works seamlessly with all types of audio files, including WAV files.
-- **Versatile Applications**: Ideal for music producers, DJs, karaoke enthusiasts, podcasters, and content creators.
-
+This is my personal project Song Seperator. It is a web application that allows users to split any song into vocal, drum, instrument, and bass tracks. Music production inspired me to make a simple to use STEM track splitter that anyone can use.
 
 ## Technologies Used
 
 - **Node.js:** Backend server runtime
 - **Express.js:** Web framework for Node.js
-- **React:** Frontend library for building user interfaces
+- **React:** Frontend library for building the user interface
 - **Spleeter:** Audio separation library by Deezer
 
 ## How It Works
