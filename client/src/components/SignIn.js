@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React, { useState } from 'react';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -13,16 +14,33 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { ThemeProvider } from '@mui/material/styles';
 import formTheme from './formTheme';
-
+import axios from 'axios';
 
 export default function SignIn() {
-  const handleSubmit = (event) => {
+  const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
+    const user = {
       email: data.get('email'),
       password: data.get('password'),
-    });
+    };
+
+    try {
+      const response = await axios.post('http://localhost:5000/signin', user);
+      if (response.data === "Success") {
+        console.log('Logged in successfully:', response.data);
+        navigate('/');
+      } else {
+        setErrorMessage('Username or password incorrect');
+        console.error('Failed to log in:', response.data);
+      }
+    } catch (error) {
+      setErrorMessage('An error occurred while logging in');
+      console.error('An error occurred while logging in:', error);
+    }
   };
 
   return (
@@ -84,17 +102,28 @@ export default function SignIn() {
             </Button>
             <Grid container>
               <Grid item xs>
-              <Link href="#" variant="body2" sx={{ color: 'white', textDecoration: 'underline', '&:hover': { textDecoration: 'underline' } }}>
-              Forgot password?
-              </Link>
+                <Link component={RouterLink} to="#" variant="body2" sx={{ color: 'white', textDecoration: 'underline', '&:hover': { textDecoration: 'underline' } }}>
+                  Forgot password?
+                </Link>
               </Grid>
               <Grid item>
-              <Link href="/sign-up/" variant="body2" sx={{ color: 'white', textDecoration: 'underline', '&:hover': { textDecoration: 'underline' } }}>
-              Don't have an account? Sign Up
-              </Link>
+                <Link component={RouterLink} to="/sign-up/" variant="body2" sx={{ color: 'white', textDecoration: 'underline', '&:hover': { textDecoration: 'underline' } }}>
+                  Don't have an account? Sign Up
+                </Link>
               </Grid>
             </Grid>
           </Box>
+          {errorMessage && (
+          <Typography
+            variant="body2"
+            color="error"
+            align="center"
+            gutterBottom
+            sx={{ paddingTop: 2 }} // Add padding to the top
+          >
+            {errorMessage}
+          </Typography>
+        )}
         </Box>
       </Container>
     </ThemeProvider>

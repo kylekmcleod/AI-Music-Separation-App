@@ -1,20 +1,34 @@
+// Required modules
 const express = require('express');
 const multer = require('multer');
 const cors = require('cors');
 const { exec } = require('child_process');
 const path = require('path');
 const fs = require('fs');
+const bodyParser = require('body-parser');
 
+// Express app
 const app = express();
+
+// Multer upload
 const upload = multer({ dest: 'uploads/' });
 
+// Middleware
 app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
+// Mongoose connection
+const collection = require('./src/mongodb.js');
+const userModel = require('./models/user.js');
 
+// Server is running message
 app.get('/', (req, res) => {
   res.send('Server is running!');
 });
 
+
+// Execute python commands
 app.post('/upload', upload.single('audioFile'), (req, res) => {
   const file = req.file;
   if (!file) {
@@ -46,7 +60,6 @@ app.post('/upload', upload.single('audioFile'), (req, res) => {
 
     console.log(`Spleeter stdout: ${stdout}`);
 
-    // List the processed files
     fs.readdir(outputDir, (err, files) => {
       if (err) {
         console.error(`Error reading output directory: ${err.message}`);
@@ -67,6 +80,7 @@ app.post('/upload', upload.single('audioFile'), (req, res) => {
   });
 });
 
+// Router for downloading the files
 app.get('/download', (req, res) => {
   const filePath = req.query.file;
   if (!filePath) {
@@ -81,6 +95,33 @@ app.get('/download', (req, res) => {
   });
 });
 
+
+// Sign up
+app.post('/signup', (req, res) => {
+  userModel.create(req.body)
+  .then((users) => res.json(users))
+  .catch((err) => res.json(err));
+});
+
+// Sign in
+app.post('/signin', (req, res) => {
+  const { email, password } = req.body;
+  userModel.findOne({ email: email })
+    .then((user) => {
+      if (user) {
+        if (user.password === password) {
+          res.json("Success");
+        } else {
+          res.json({ message: 'Incorrect password' });
+        }
+      } else {
+        res.json({ message: 'User not found' });
+      }
+    })
+    .catch((err) => res.json(err));
+});
+
+// App listening
 app.listen(5000, () => {
   console.log('Server running on http://localhost:5000');
 });
