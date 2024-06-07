@@ -2,21 +2,21 @@ import { alpha } from '@mui/material/styles';
 import { red } from '@mui/material/colors';
 
 export const brand = {
-  50: '#F0F7FF',
-  100: '#CEE5FD',
-  200: '#9CCCFC',
-  300: '#55A6F6',
-  400: '#0A66C2',
-  500: '#0959AA',
-  600: '#0959AA',
-  700: '#033363',
-  800: '#02294F',
-  900: '#021F3B',
+  50: '#FBFCFE',
+  100: '#000000',
+  200: '#EF4A40',
+  300: '#EF4A40',
+  400: '#EF4A40',
+  500: '#EF4A40',
+  600: '#EF4A40',
+  700: '#EF4A40',
+  800: '#EF4A40',
+  900: '#EF4A40',
 };
 
 export const secondary = {
-  50: '#F9F0FF',
-  100: '#E9CEFD',
+  50: '#000000',
+  100: '#EF4A40',
   200: '#D49CFC',
   300: '#B355F6',
   400: '#750AC2',
@@ -29,16 +29,17 @@ export const secondary = {
 
 export const gray = {
   50: '#FBFCFE',
-  100: '#EAF0F5',
-  200: '#D6E2EB',
-  300: '#BFCCD9',
-  400: '#94A6B8',
+  100: '#E8F0F5',
+  200: '#D4E2EA',
+  300: '#BDCBD8',
+  400: '#92A6B6',
   500: '#5B6B7C',
-  600: '#4C5967',
-  700: '#364049',
-  800: '#131B20',
-  900: '#090E10',
+  600: '#4A5865',
+  700: '#343E47',
+  800: '#121A1E',
+  900: '#080C0E',
 };
+
 
 export const green = {
   50: '#F6FEF6',
