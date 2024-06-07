@@ -3,19 +3,10 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import LandingPage from './components/LandingPage';
 import TermsOfService from './components/TermsOfService';
 import PrivacyPolicy from './components/PrivacyPolicy';
+import SignIn from './components/SignIn';
+import SignUp from './components/SignUp';
 
 function App() {
-  const [backendData, setBackendData] = useState([{}]);
-
-  useEffect(() => {
-    fetch('/api').then(
-      response => response.json()
-    ).then(
-      data => {
-        setBackendData(data);
-      }
-    );
-  }, []);
 
   return (
     <Router>
@@ -23,6 +14,8 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/terms-of-service" element={<TermsOfService />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/sign-in" element={<SignIn />} />
+        <Route path="/sign-up" element={<SignUp />} />
       </Routes>
     </Router>
   );

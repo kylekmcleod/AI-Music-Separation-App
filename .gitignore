@@ -1,2 +1,7 @@
 server/node_modules
+server/.venv/Lib
 client/node_modules
+server/pretrained_models
+server/.venv
+server/outputs
+server/uploads

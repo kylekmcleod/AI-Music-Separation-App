@@ -7,12 +7,16 @@ import Divider from '@mui/material/Divider';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import AppAppBar from './AppAppBar';
-import Hero from './Hero';
+import UploadSection from './UploadSection';
 import Highlights from './Highlights';
 import Features from './Features';
 import FAQ from './FAQ';
 import Footer from './Footer';
 import getLPTheme from './getLPTheme';
+import FileUploaded from './FileUploaded';
+import Button from '@mui/material/Button';
+import TrackPlayer from './TrackPlayer';
+
 
 const defaultTheme = createTheme({});
 
@@ -56,6 +60,10 @@ export default function LandingPage() {
   const [showCustomTheme, setShowCustomTheme] = React.useState(true);
   const LPtheme = createTheme(getLPTheme(mode));
 
+  const [isFileUploaded, setIsFileUploaded] = React.useState(false);
+  const [isDone, setIsDone] = React.useState(false);
+  const [files, setFiles] = React.useState([]);
+
   const toggleColorMode = () => {
     setMode((prev) => (prev === 'dark' ? 'light' : 'dark'));
   };
@@ -64,13 +72,33 @@ export default function LandingPage() {
     setShowCustomTheme((prev) => !prev);
   };
 
+  const resetComponents = () => {
+    setIsFileUploaded(false);
+    setIsDone(false);
+  };
+
+  const handleFileUpload = () => {
+    setIsFileUploaded(true);
+  };
+
+  const handleProcessingDone = (isDone, files) => {
+    setIsDone(isDone);
+    setFiles(files);
+  };
+  
   return (
     <ThemeProvider theme={showCustomTheme ? LPtheme : defaultTheme}>
       <CssBaseline />
       <AppAppBar mode={mode} toggleColorMode={toggleColorMode} />
-      <Hero />
+
+      {isFileUploaded ? (
+        isDone ? <TrackPlayer files={files} /> : <FileUploaded />
+      ) : (
+        <UploadSection onFileUpload={handleFileUpload} onProcessingDone={handleProcessingDone} />
+      )}
+
       <Box sx={{ bgcolor: 'background.default' }}>
-        <Features />
+        {/* <Features /> */}
         <Divider />
         <Divider />
         <Highlights />
@@ -80,10 +108,12 @@ export default function LandingPage() {
         <Divider />
         <Footer />
       </Box>
+
       <ToggleCustomTheme
         showCustomTheme={showCustomTheme}
         toggleCustomTheme={toggleCustomTheme}
       />
+      <Button onClick={resetComponents}>Reset Components</Button>
     </ThemeProvider>
   );
 }

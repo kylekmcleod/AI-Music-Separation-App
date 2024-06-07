@@ -1,13 +1,20 @@
 # AI-Powered Music Separator
-Welcome to my music splitter project! This application enables you to separate music into individual streams such as vocals, bass, percussion, and more. With this tool, you can rebalance the individual volumes of these elements, providing you with the simplest way to obtain multitracks from any song.
+Welcome to SongSeperator! This application enables you to separate music into individual streams such as vocals, bass, percussion, and more. With this tool, you can download the individual layers of any song to use for your own music projects, remixes, or analysis.
 
 ## Features
-- **AI-Driven Stem Separation**: Utilizes advanced machine learning algorithms to dissect audio into individual components with extreme accuracy.
+- **AI-Driven Stem Separation**: Utilizes advanced Spleeter algorithms to dissect audio into individual components with extreme accuracy.
 - **User-Friendly Interface**: Easy-to-use interface for uploading audio files and selecting elements to isolate.
 - **Creative Control**: Extracted components grant you the creative freedom to modify, remix, and share your creations.
 - **Support for Various Audio Formats**: Works seamlessly with all types of audio files, including WAV files.
 - **Versatile Applications**: Ideal for music producers, DJs, karaoke enthusiasts, podcasters, and content creators.
 
+
+## Technologies Used
+
+- **Node.js:** Backend server runtime
+- **Express.js:** Web framework for Node.js
+- **React:** Frontend library for building user interfaces
+- **Spleeter:** Audio separation library by Deezer
 
 ## How It Works
 1. **Upload Your Audio File**: Choose the song you want to separate.
@@ -16,8 +23,9 @@ Welcome to my music splitter project! This application enables you to separate m
 4. **Download and Edit**: Once the separation is complete, download the individual stems and adjust their volumes or remix them as desired.
 
 ## Running the project
-1. Right click **client** folder and Open in Integrated Terminal. Type ```npm install``` to install dependencies.
-2. Right click **server** folder and Open in Integrated Terminal. Type ```npm install``` to install dependencies.
-3. Right click **client** folder and Open in Integrated Terminal. Type ```npm start```.
-4. Right click **server** folder and Open in Integrated Terminal. Type ```npm start```.
-5. Open your web browser and navigate to http://localhost:3000.
+1. Make sure node.js is installed on your system. https://nodejs.org/en
+2. Right click **client** folder and Open in Integrated Terminal. Type ```npm install``` to install dependencies.
+3. Right click **server** folder and Open in Integrated Terminal. Type ```npm install``` to install dependencies.
+4. Right click **client** folder and Open in Integrated Terminal. Type ```npm start```.
+5. Right click **server** folder and Open in Integrated Terminal. Type ```npm start```.
+6. Open your web browser and navigate to http://localhost:3000.
