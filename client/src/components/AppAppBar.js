@@ -14,6 +14,8 @@ import Drawer from '@mui/material/Drawer';
 import MenuIcon from '@mui/icons-material/Menu';
 import ToggleColorMode from './ToggleColorMode';
 
+import { useNavigate } from 'react-router-dom';
+
 const logoStyle = {
   width: '140px',
   height: 'auto',
@@ -21,6 +23,8 @@ const logoStyle = {
 };
 
 function AppAppBar({ mode, toggleColorMode }) {
+  const navigate = useNavigate();
+
   const [open, setOpen] = React.useState(false);
   const theme = useTheme();
 
@@ -112,6 +116,14 @@ function AppAppBar({ mode, toggleColorMode }) {
                 >
                   <Typography variant="body2" color="text.primary">
                     FAQ
+                  </Typography>
+                </MenuItem>
+                <MenuItem
+                  onClick={() => navigate('/browse-samples')}
+                  sx={{ py: '6px', px: '12px' }}
+                >
+                  <Typography variant="body2" color="text.primary">
+                    Browse Samples
                   </Typography>
                 </MenuItem>
               </Box>

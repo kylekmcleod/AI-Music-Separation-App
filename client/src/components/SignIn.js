@@ -119,7 +119,7 @@ export default function SignIn() {
             color="error"
             align="center"
             gutterBottom
-            sx={{ paddingTop: 2 }} // Add padding to the top
+            sx={{ paddingTop: 2 }}
           >
             {errorMessage}
           </Typography>
