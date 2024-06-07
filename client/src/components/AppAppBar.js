@@ -22,7 +22,8 @@ const logoStyle = {
   cursor: 'pointer',
 };
 
-function AppAppBar({ mode, toggleColorMode }) {
+function AppAppBar({ mode, toggleColorMode, currentUser }) {
+  console.log(currentUser);
   const navigate = useNavigate();
 
   const [open, setOpen] = React.useState(false);
@@ -81,6 +82,7 @@ function AppAppBar({ mode, toggleColorMode }) {
               borderColor: 'divider',
             })}
           >
+            
             <Box
               sx={{
                 flexGrow: 1,
@@ -136,6 +138,7 @@ function AppAppBar({ mode, toggleColorMode }) {
               }}
             >
               <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} />
+              
               <Button
                 color="primary"
                 variant="text"
@@ -236,6 +239,7 @@ function AppAppBar({ mode, toggleColorMode }) {
 AppAppBar.propTypes = {
   mode: PropTypes.oneOf(['dark', 'light']).isRequired,
   toggleColorMode: PropTypes.func.isRequired,
+  currentUser: PropTypes.object,
 };
 
 export default AppAppBar;

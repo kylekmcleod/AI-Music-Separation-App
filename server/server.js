@@ -6,6 +6,8 @@ const { exec } = require('child_process');
 const path = require('path');
 const fs = require('fs');
 const bodyParser = require('body-parser');
+const session = require('express-session');
+require('dotenv').config();
 
 // Express app
 const app = express();
@@ -17,6 +19,15 @@ const upload = multer({ dest: 'uploads/' });
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    secure: false,
+    maxAge: 24 * 60 * 60 * 1000,
+  }
+}));
 
 // Mongoose connection
 const collection = require('./src/mongodb.js');
@@ -97,29 +108,35 @@ app.get('/download', (req, res) => {
 
 
 // Sign up
-app.post('/signup', (req, res) => {
-  userModel.create(req.body)
-  .then((users) => res.json(users))
-  .catch((err) => res.json(err));
+app.post('/signup', async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    const user = await userModel.create({ email, password });
+    req.session.user = user;
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ message: 'Error signing up', error: error.message });
+  }
 });
 
 // Sign in
-app.post('/signin', (req, res) => {
+app.post('/signin', async (req, res) => {
   const { email, password } = req.body;
-  userModel.findOne({ email: email })
-    .then((user) => {
-      if (user) {
-        if (user.password === password) {
-          res.json("Success");
-        } else {
-          res.json({ message: 'Incorrect password' });
-        }
-      } else {
-        res.json({ message: 'User not found' });
-      }
-    })
-    .catch((err) => res.json(err));
+  try {
+    const user = await userModel.findOne({ email });
+    if (user && user.password === password) {
+      req.session.user = user;
+      console.log(req.session);
+      res.json("Success");
+    } else {
+      res.status(401).json({ message: 'Incorrect email or password' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'Error signing in', error: error.message });
+  }
 });
+
+
 
 // App listening
 app.listen(5000, () => {
