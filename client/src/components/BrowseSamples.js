@@ -68,6 +68,11 @@ export default function BrowseSamples() {
     setShowCustomTheme((prev) => !prev);
   };
 
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+
   return (
     <ThemeProvider theme={showCustomTheme ? LPtheme : defaultTheme}>
       <CssBaseline />
