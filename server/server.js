@@ -170,7 +170,26 @@ app.get('/current-user', (req, res) => {
 });
 
 
-
+app.post('/deduct-credit', async (req, res) => {
+  if (req.session.user) {
+    try {
+      const user = await userModel.findById(req.session.user._id);
+      if (user && user.credits > 0) {
+        user.credits -= 1;
+        await user.save();
+        req.session.user = user;
+        res.json({ credits: user.credits, user });
+      } else {
+        res.status(400).json({ message: 'Insufficient credits' });
+      }
+    } catch (error) {
+      console.error('Error deducting credits:', error);
+      res.status(500).json({ message: 'Error deducting credits', error: error.message });
+    }
+  } else {
+    res.status(401).json({ message: 'Not authenticated' });
+  }
+});
 
 
 

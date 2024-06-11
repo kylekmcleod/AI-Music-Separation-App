@@ -7,33 +7,52 @@ import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import logo from '../images/stems.png';
-
+import { useCurrentUser } from '../App.js'
 import { useTheme } from '@mui/material/styles';
 
 export default function UploadSection({onFileUpload, onProcessingDone}) {
+  const currentUser = useCurrentUser();
   const [dragging, setDragging] = React.useState(false);
   const theme = useTheme();
   const handleFileChange = (files) => {
     const file = files[0];
-    if (file && (file.type === 'audio/mpeg' || file.type === 'audio/wav' || file.type === 'audio/flac')) {
-      console.log('File uploaded:', file);
-      onFileUpload();
-      const formData = new FormData();
-      formData.append('audioFile', file);
-  
-      fetch('http://localhost:5000/upload', { 
-        method: 'POST',
-        body: formData
-      }).then(response => response.json())
-        .then(data => {
-          console.log(data);
-          onProcessingDone(data.isDone, data.files);
-        })
-        .catch(error => {
-          console.error('Error:', error);
-        });
+    if (currentUser.credits > 0) {
+      if (file && (file.type === 'audio/mpeg' || file.type === 'audio/wav' || file.type === 'audio/flac')) {
+        console.log('File uploaded:', file);
+        onFileUpload();
+        const formData = new FormData();
+        formData.append('audioFile', file);
+    
+        fetch('http://localhost:5000/upload', { 
+          method: 'POST',
+          body: formData
+        }).then(response => response.json())
+          .then(data => {
+            console.log(data);
+            onProcessingDone(data.isDone, data.files);
+            if (data.isDone) {
+              fetch('http://localhost:5000/deduct-credit', {
+                method: 'POST',
+                credentials: 'include',
+              })
+                .then(response => response.json())
+                .then(creditData => {
+                  console.log('Credit deducted:', creditData);
+                  currentUser.credits = creditData.credits;
+                })
+                .catch(error => {
+                  console.error('Error deducting credit:', error);
+                });
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+      } else {
+        alert('Only .mp3, .wav, and .flac files are allowed.');
+      }
     } else {
-      alert('Only .mp3, .wav, and .flac files are allowed.');
+      alert('You do not have enough credits to process this file.');
     }
   };
 
