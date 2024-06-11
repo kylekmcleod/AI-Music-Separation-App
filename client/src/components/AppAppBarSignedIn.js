@@ -158,7 +158,7 @@ function AppAppBarSignedIn({ mode, toggleColorMode}) {
                 size="small"
                 component="a"
               >
-                Email
+                {currentUser.email}
               </Button>
               <Button
                 color="primary"
