@@ -58,6 +58,12 @@ export default function SignUp() {
       newErrors.confirmPassword = 'Passwords do not match';
     }
 
+    // Check if email is in valid format
+    const emailRegex = /\S+@\S+\.\S+/;
+    if (!emailRegex.test(formData.email)) {
+      newErrors.email = 'Email is not in a valid format';
+    }
+
     // If there are errors, set them and return
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
