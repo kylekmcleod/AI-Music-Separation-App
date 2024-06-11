@@ -77,11 +77,6 @@ export default function LandingPage() {
     setShowCustomTheme((prev) => !prev);
   };
 
-  const resetComponents = () => {
-    setIsFileUploaded(false);
-    setIsDone(false);
-  };
-
   const handleFileUpload = () => {
     setIsFileUploaded(true);
   };
@@ -122,7 +117,6 @@ export default function LandingPage() {
         showCustomTheme={showCustomTheme}
         toggleCustomTheme={toggleCustomTheme}
       />
-      <Button onClick={resetComponents}>Reset Components</Button>
     </ThemeProvider>
   );
 }
