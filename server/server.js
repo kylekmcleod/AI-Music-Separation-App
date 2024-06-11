@@ -7,6 +7,7 @@ const path = require('path');
 const fs = require('fs');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const MongoStore = require('connect-mongo');
 require('dotenv').config();
 
 // Express app
@@ -16,22 +17,31 @@ const app = express();
 const upload = multer({ dest: 'uploads/' });
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true
+}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
+  store: MongoStore.create({
+    mongoUrl: process.env.MONGODB_URI,
+    collectionName: 'sessions',
+  }),
   cookie: {
     secure: false,
-    maxAge: 24 * 60 * 60 * 1000,
+    httpOnly: false,
+    maxAge: 60 * 1000,
   }
 }));
 
 // Mongoose connection
 const collection = require('./src/mongodb.js');
 const userModel = require('./models/user.js');
+const { Mongoose, mongo } = require('mongoose');
 
 // Server is running message
 app.get('/', (req, res) => {
@@ -127,7 +137,7 @@ app.post('/signin', async (req, res) => {
     if (user && user.password === password) {
       req.session.user = user;
       console.log(req.session);
-      res.json("Success");
+      res.json({ success: true, user: req.session.user });
     } else {
       res.status(401).json({ message: 'Incorrect email or password' });
     }
@@ -135,6 +145,33 @@ app.post('/signin', async (req, res) => {
     res.status(500).json({ message: 'Error signing in', error: error.message });
   }
 });
+
+// Sign out
+app.post('/signout', (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.error('Error destroying session:', err);
+      res.status(500).json({ message: 'Error signing out' });
+    } else {
+      console.log('Session destroyed');
+      res.clearCookie('connect.sid')
+      res.redirect('/');
+    }
+  });
+});
+
+// Current user
+app.get('/current-user', (req, res) => {
+  if (req.session && req.session.user) {
+    res.json({ user: req.session.user });
+  } else {
+    res.status(401).json({ message: 'Not authenticated' });
+  }
+});
+
+
+
+
 
 
 

@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
+
 import PropTypes from 'prop-types';
 
 import CssBaseline from '@mui/material/CssBaseline';
@@ -16,6 +17,9 @@ import getLPTheme from './getLPTheme';
 import FileUploaded from './FileUploaded';
 import Button from '@mui/material/Button';
 import TrackPlayer from './TrackPlayer';
+import axios from 'axios';
+import { useCurrentUser } from '../App.js'
+import AppAppBarSignedIn from './AppAppBarSignedIn';
 
 
 const defaultTheme = createTheme({});
@@ -56,6 +60,7 @@ ToggleCustomTheme.propTypes = {
 };
 
 export default function LandingPage() {
+  const currentUser = useCurrentUser();
   const [mode, setMode] = React.useState('dark');
   const [showCustomTheme, setShowCustomTheme] = React.useState(true);
   const LPtheme = createTheme(getLPTheme(mode));
@@ -86,10 +91,15 @@ export default function LandingPage() {
     setFiles(files);
   };
   
+  
   return (
     <ThemeProvider theme={showCustomTheme ? LPtheme : defaultTheme}>
       <CssBaseline />
-      <AppAppBar mode={mode} toggleColorMode={toggleColorMode} />
+      {currentUser ? (
+        <AppAppBarSignedIn mode={mode} toggleColorMode={toggleColorMode} />
+      ) : (
+        <AppAppBar mode={mode} toggleColorMode={toggleColorMode} />
+      )}
 
       {isFileUploaded ? (
         isDone ? <TrackPlayer files={files} /> : <FileUploaded />
@@ -98,7 +108,6 @@ export default function LandingPage() {
       )}
 
       <Box sx={{ bgcolor: 'background.default' }}>
-        {/* <Features /> */}
         <Divider />
         <Divider />
         <Highlights />

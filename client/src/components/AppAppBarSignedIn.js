@@ -14,6 +14,7 @@ import Drawer from '@mui/material/Drawer';
 import MenuIcon from '@mui/icons-material/Menu';
 import ToggleColorMode from './ToggleColorMode';
 import { useCurrentUser } from '../App.js';
+import axios from 'axios';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -23,7 +24,7 @@ const logoStyle = {
   cursor: 'pointer',
 };
 
-function AppAppBar({ mode, toggleColorMode}) {
+function AppAppBarSignedIn({ mode, toggleColorMode}) {
   const currentUser = useCurrentUser();
   console.log(currentUser);
   const navigate = useNavigate();
@@ -53,6 +54,17 @@ function AppAppBar({ mode, toggleColorMode}) {
       setOpen(false);
     }
   };
+  const handleSignOut = async () => {
+    try {
+      await axios.post('http://localhost:5000/signout', null, { withCredentials: true });
+      window.location.href = '/';
+    } catch (error) {
+      console.error('Error signing out:', error);
+    }
+  };
+  
+
+
   return (
     <div>
       <AppBar
@@ -145,19 +157,18 @@ function AppAppBar({ mode, toggleColorMode}) {
                 variant="text"
                 size="small"
                 component="a"
-                href="/sign-in"
               >
-                Sign in
+                Email
               </Button>
               <Button
                 color="primary"
                 variant="contained"
                 size="small"
                 component="a"
-                href="/sign-up/"
+                onClick = {handleSignOut}
                 
               >
-                Sign up
+                Sign out
               </Button>
             </Box>
             <Box sx={{ display: { sm: '', md: 'none' } }}>
@@ -237,10 +248,10 @@ function AppAppBar({ mode, toggleColorMode}) {
   );
 }
 
-AppAppBar.propTypes = {
+AppAppBarSignedIn.propTypes = {
   mode: PropTypes.oneOf(['dark', 'light']).isRequired,
   toggleColorMode: PropTypes.func.isRequired,
   currentUser: PropTypes.object,
 };
 
-export default AppAppBar;
+export default AppAppBarSignedIn;

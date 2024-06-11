@@ -11,6 +11,8 @@ import Footer from './Footer';
 import getLPTheme from './getLPTheme';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import { useCurrentUser } from '../App.js'
+import AppAppBarSignedIn from './AppAppBarSignedIn';
 
 const defaultTheme = createTheme({});
 
@@ -50,6 +52,7 @@ ToggleCustomTheme.propTypes = {
 };
 
 export default function PrivacyPolicy() {
+  const currentUser = useCurrentUser();
   const [mode, setMode] = React.useState('dark');
   const [showCustomTheme, setShowCustomTheme] = React.useState(true);
   const LPtheme = createTheme(getLPTheme(mode));
@@ -65,7 +68,11 @@ export default function PrivacyPolicy() {
   return (
     <ThemeProvider theme={showCustomTheme ? LPtheme : defaultTheme}>
       <CssBaseline />
-      <AppAppBar mode={mode} toggleColorMode={toggleColorMode} />
+      {currentUser ? (
+        <AppAppBarSignedIn mode={mode} toggleColorMode={toggleColorMode} />
+      ) : (
+        <AppAppBar mode={mode} toggleColorMode={toggleColorMode} />
+      )}
       <Box sx={{ bgcolor: 'background.default' }}>
         <Divider />
         <Container

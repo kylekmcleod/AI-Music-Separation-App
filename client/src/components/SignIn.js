@@ -29,10 +29,13 @@ export default function SignIn() {
     };
 
     try {
-      const response = await axios.post('http://localhost:5000/signin', user);
-      if (response.data === "Success") {
-        console.log('Logged in successfully:', response.data);
+      const response = await axios.post('http://localhost:5000/signin', user, {
+        withCredentials: true,
+      });
+      if (response.data.success) {
+        console.log('Logged in successfully:', response.data.user);
         navigate('/');
+        window.location.reload();
       } else {
         setErrorMessage('Username or password incorrect');
         console.error('Failed to log in:', response.data);
