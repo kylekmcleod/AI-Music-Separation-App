@@ -150,15 +150,23 @@ function AppAppBarSignedIn({ mode, toggleColorMode}) {
                 alignItems: 'center',
               }}
             >
-              <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} />
-              
+              {/* <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} /> */}
+              <Button
+                color="primary"
+                variant="text"
+                size="small"
+                component="a"
+                sx={{ color: 'white' }}
+              >
+              Credits: {currentUser.credits}
+              </Button>
               <Button
                 color="primary"
                 variant="text"
                 size="small"
                 component="a"
               >
-                {currentUser.email}
+              {currentUser.email}
               </Button>
               <Button
                 color="primary"
@@ -198,7 +206,7 @@ function AppAppBarSignedIn({ mode, toggleColorMode}) {
                       flexGrow: 1,
                     }}
                   >
-                    <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} />
+                    {/* <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} /> */}
                   </Box>
                   <MenuItem onClick={() => scrollToSection('highlights')}>
                     About
@@ -233,6 +241,9 @@ function AppAppBarSignedIn({ mode, toggleColorMode}) {
                       Sign Out
                     </Button>
                   </MenuItem>
+                  <Typography variant="body1" color="text.primary" textAlign = "center">
+                    Credits: {currentUser.credits}
+                  </Typography>
                 </Box>
               </Drawer>
             </Box>

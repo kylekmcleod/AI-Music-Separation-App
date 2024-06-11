@@ -138,7 +138,7 @@ function AppAppBar({ mode, toggleColorMode}) {
                 alignItems: 'center',
               }}
             >
-              <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} />
+              {/* <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} /> */}
               
               <Button
                 color="primary"
@@ -187,7 +187,7 @@ function AppAppBar({ mode, toggleColorMode}) {
                       flexGrow: 1,
                     }}
                   >
-                    <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} />
+                  {/* <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} /> */}
                   </Box>
                   <MenuItem onClick={() => scrollToSection('highlights')}>
                     About

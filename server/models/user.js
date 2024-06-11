@@ -12,7 +12,11 @@ const userSchema = new mongoose.Schema({
     },
     password:{
         type: String,
-    }
+    },
+    credits:{
+        type: Number,
+        default: 3
+    },
 });
 
 const userModel = mongoose.model("users", userSchema);
