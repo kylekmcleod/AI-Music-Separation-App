@@ -158,7 +158,7 @@ export default function UploadSection({onFileUpload, onProcessingDone}) {
 
           <Typography variant="caption" textAlign="center" sx={{ opacity: 0.8 }}>
             By clicking &quot;Upload Audio&quot; you agree to our&nbsp;
-            <Link href="#" color="primary">
+            <Link href="/terms-of-service" color="primary">
               Terms & Conditions
             </Link>
             .
