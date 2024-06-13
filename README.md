@@ -8,6 +8,7 @@ This is my personal project Song Seperator. It is a web application that allows 
 - **Node.js:** Backend server runtime
 - **Express.js:** Web framework for Node.js
 - **React:** Frontend library for building the user interface
+- **MongoDB:** Database
 - **Spleeter:** Audio separation library by Deezer
 
 ## How It Works
