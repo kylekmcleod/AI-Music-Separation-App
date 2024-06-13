@@ -41,6 +41,7 @@ app.use(session({
 // Mongoose connection
 const collection = require('./src/mongodb.js');
 const userModel = require('./models/user.js');
+const fileModel = require('./models/files.js');
 const { Mongoose, mongo } = require('mongoose');
 
 // Server is running message
@@ -51,6 +52,7 @@ app.get('/', (req, res) => {
 
 // Execute python commands
 app.post('/upload', upload.single('audioFile'), (req, res) => {
+
   const file = req.file;
   if (!file) {
     return res.status(400).json({ message: 'No file uploaded' });
@@ -61,14 +63,14 @@ app.post('/upload', upload.single('audioFile'), (req, res) => {
 
   const outputDir = path.resolve(__dirname, 'outputs', fileName);
   console.log('Output directory:', outputDir);
-  
+
   let activateScript1 = 'cd .venv';
   let activateScript2 = '.\\Scripts\\activate';
   let activateScript3 = 'cd ..\\';
 
   const spleeterCommand = `${activateScript1} && ${activateScript2} && ${activateScript3} && spleeter separate -o outputs -p spleeter:4stems uploads/${fileName}`;
 
-  exec(spleeterCommand, (error, stdout, stderr) => {
+  exec(spleeterCommand, async (error, stdout, stderr) => {
     if (error) {
       console.error(`Error running Spleeter: ${error.message}`);
       return res.status(500).json({ message: 'Error processing the audio file', error: error.message });
@@ -81,7 +83,7 @@ app.post('/upload', upload.single('audioFile'), (req, res) => {
 
     console.log(`Spleeter stdout: ${stdout}`);
 
-    fs.readdir(outputDir, (err, files) => {
+    fs.readdir(outputDir, async (err, files) => {
       if (err) {
         console.error(`Error reading output directory: ${err.message}`);
         return res.status(500).json({ message: 'Error reading output directory', error: err.message });
@@ -92,14 +94,31 @@ app.post('/upload', upload.single('audioFile'), (req, res) => {
         url: `http://localhost:5000/download?file=${encodeURIComponent(path.join(outputDir, file))}`
       }));
 
-      res.json({
-        message: 'File uploaded and processed successfully',
-        isDone: true,
-        files: filePaths
-      });
+      // Save file information to the database
+      try {
+        const newFile = new fileModel({
+          convertedBass: filePaths.find((file) => file.name === 'bass.wav').url,
+          convertedVocal: filePaths.find((file) => file.name === 'vocals.wav').url,
+          convertedDrums: filePaths.find((file) => file.name === 'drums.wav').url,
+          convertedOther: filePaths.find((file) => file.name === 'other.wav').url
+        });
+
+        const savedFile = await newFile.save();
+        console.log('File saved to database:', savedFile);
+
+        res.json({
+          message: 'File uploaded and processed successfully',
+          isDone: true,
+          files: filePaths
+        });
+      } catch (dbError) {
+        console.error(`Error saving file to database: ${dbError.message}`);
+        return res.status(500).json({ message: 'Error saving file to database', error: dbError.message });
+      }
     });
   });
 });
+
 
 // Router for downloading the files
 app.get('/download', (req, res) => {
@@ -120,14 +139,23 @@ app.get('/download', (req, res) => {
 // Sign up
 app.post('/signup', async (req, res) => {
   const { email, password } = req.body;
+  
   try {
+    const existingUser = await userModel.findOne({ email });
+    
+    if (existingUser) {
+      return res.status(400).json({ message: 'Email already in use' });
+    }
+    
     const user = await userModel.create({ email, password });
     req.session.user = user;
+    
     res.json(user);
   } catch (error) {
     res.status(500).json({ message: 'Error signing up', error: error.message });
   }
 });
+
 
 // Sign in
 app.post('/signin', async (req, res) => {
@@ -169,7 +197,7 @@ app.get('/current-user', (req, res) => {
   }
 });
 
-
+// Deduct credit
 app.post('/deduct-credit', async (req, res) => {
   if (req.session.user) {
     try {

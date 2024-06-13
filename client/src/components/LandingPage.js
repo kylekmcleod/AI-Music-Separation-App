@@ -95,7 +95,6 @@ export default function LandingPage() {
       ) : (
         <AppAppBar mode={mode} toggleColorMode={toggleColorMode} />
       )}
-
       {isFileUploaded ? (
         isDone ? <TrackPlayer files={files} /> : <FileUploaded />
       ) : (

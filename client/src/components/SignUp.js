@@ -30,6 +30,8 @@ export default function SignUp() {
     password: '',
     confirmPassword: '',
   });
+  const [emailError, setEmailError] = useState('');
+
   const fieldLabels = {
     firstName: 'First Name',
     lastName: 'Last Name',
@@ -44,6 +46,8 @@ export default function SignUp() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    setErrors({});
+    setEmailError('');
 
     // Check if any field is empty
     const newErrors = {};
@@ -72,6 +76,7 @@ export default function SignUp() {
 
     // Clear errors if validation passes
     setErrors({});
+    setEmailError('');
 
     const user = {
       firstName: formData.firstName,
@@ -84,13 +89,16 @@ export default function SignUp() {
       .then(response => {
         if (response.data) {
           console.log('User registered:', response.data);
-          navigate('/sign-in/')
+          navigate('/sign-in/');
         } else {
           console.error('Empty response data received from the server');
         }
       })
       .catch(error => {
         console.error('There was an error registering the user:', error);
+        if (error.response && error.response.status === 400) {
+          setEmailError('Email is already in use');
+        }
       });
 
     console.log(user);
@@ -155,6 +163,7 @@ export default function SignUp() {
                   onChange={handleChange}
                 />
                 {errors.email && <Typography variant="caption" color="error">{errors.email}</Typography>}
+                {emailError && <Typography variant="caption" color="error">{emailError}</Typography>}
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -197,7 +206,7 @@ export default function SignUp() {
               <Grid item>
                 <Link href="/sign-in/" variant="body2" sx={{ color: 'white', textDecoration: 'underline', '&:hover': { textDecoration: 'underline' } }}>
                   Have an account? Sign in
-                  </Link>
+                </Link>
               </Grid>
             </Grid>
           </Box>
