@@ -19,9 +19,10 @@ This is my personal project Song Seperator. It is a web application that allows 
 
 ## Running the project
 1. Clone repository to your system.
-2. Make sure node.js is installed on your system. https://nodejs.org/en
+2. Make sure node.js is installed on your system. https://nodejs.org/en.
 3. Download Python 3.8.10. https://www.python.org/downloads/release/python-3810/. Make sure to check "Add python to enviromental variables".
 4. Install Python VSCode extentsion.
+5. Install FFmpeg https://phoenixnap.com/kb/ffmpeg-windows#ftoc-heading-4.
 
 ##### Client (frontend)
 1. Right click **client** folder and Open in Integrated Terminal.
