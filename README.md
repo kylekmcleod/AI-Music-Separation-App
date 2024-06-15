@@ -18,9 +18,31 @@ This is my personal project Song Seperator. It is a web application that allows 
 4. **Download and Edit**: Once the separation is complete, download the individual stems and adjust their volumes or remix them as desired.
 
 ## Running the project
-1. Make sure node.js is installed on your system. https://nodejs.org/en
-2. Right click **client** folder and Open in Integrated Terminal. Type ```npm install``` to install dependencies.
-3. Right click **server** folder and Open in Integrated Terminal. Type ```npm install``` to install dependencies.
-4. Right click **client** folder and Open in Integrated Terminal. Type ```npm start```.
-5. Right click **server** folder and Open in Integrated Terminal. Type ```npm start```.
-6. Open your web browser and navigate to http://localhost:3000.
+1. Clone repository to your system.
+2. Make sure node.js is installed on your system. https://nodejs.org/en.
+3. Download Python 3.8.10. https://www.python.org/downloads/release/python-3810/. Make sure to check "Add python to enviromental variables".
+4. Install Python VSCode extentsion.
+5. Install FFmpeg https://phoenixnap.com/kb/ffmpeg-windows#ftoc-heading-4.
+
+##### Client (frontend)
+1. Right click **client** folder and Open in Integrated Terminal.
+2. Type ```npm install``` to install dependencies.
+
+##### Server (backend)
+1. Right click **server** folder and Open in Integrated Terminal.
+2. Type ```npm install``` to install dependencies.
+3. Press CTRL + SHIFT + P to locate and select "Python: Create Enviroment".
+4. Select .venv.
+5. Select Python 3.8.10.
+6. Drag .venv folder into server directory.
+7. Open powershell as administrator and type ```powershell Set-ExecutionPolicy RemoteSigned```.
+8. In VSCode /server terminal, type ```.venv\Scripts\activate```.
+9. Type ```python -m pip install spleeter```.
+10. Replace uri variable in server/src/mongodb.js with your own MongoDB uri.
+11. Replace mongoUrl variable in server/server.js with your own MongoDB uri.
+12. Replace secret variable in server/server.js with your own secret key.
+
+##### Start project
+1. Right click **client** folder and Open in Integrated Terminal. Type ```npm start```.
+2. Right click **server** folder and Open in Integrated Terminal. Type ```npm start```.
+3. Open your web browser and navigate to http://localhost:3000.
