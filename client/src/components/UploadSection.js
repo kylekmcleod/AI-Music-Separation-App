@@ -17,39 +17,48 @@ export default function UploadSection({ onFileUpload, onProcessingDone }) {
 
   const handleFileChange = (files) => {
     const file = files[0];
-    if (currentUser.credits > 0) {
-      if (file && (file.type === 'audio/mpeg' || file.type === 'audio/wav' || file.type === 'audio/flac')) {
-        console.log('File uploaded:', file);
-        onFileUpload();
-        const formData = new FormData();
-        formData.append('audioFile', file);
+    if (currentUser.credits > 0) { // Check if user has enough credits
+      if (file && (file.type === 'audio/mpeg' || file.type === 'audio/wav' || file.type === 'audio/flac')) { // Check if file is correct type
+        const audio = new Audio();
+        audio.src = URL.createObjectURL(file);
+        audio.onloadedmetadata = () => {
+          const duration = audio.duration;
+          if (duration <= 600) { // Check if file is less than 10 minutes
+            console.log('File uploaded:', file);
+            onFileUpload();
+            const formData = new FormData();
+            formData.append('audioFile', file);
 
-        fetch('http://localhost:5000/upload', {
-          method: 'POST',
-          body: formData,
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            console.log(data);
-            onProcessingDone(data.isDone, data.files);
-            if (data.isDone) {
-              fetch('http://localhost:5000/deduct-credit', {
-                method: 'POST',
-                credentials: 'include',
+            fetch('http://localhost:5000/upload', {
+              method: 'POST',
+              body: formData,
+            })
+              .then((response) => response.json())
+              .then((data) => {
+                console.log(data);
+                onProcessingDone(data.isDone, data.files);
+                if (data.isDone) {
+                  fetch('http://localhost:5000/deduct-credit', {
+                    method: 'POST',
+                    credentials: 'include',
+                  })
+                    .then((response) => response.json())
+                    .then((creditData) => {
+                      console.log('Credit deducted:', creditData);
+                      currentUser.credits = creditData.credits;
+                    })
+                    .catch((error) => {
+                      console.error('Error deducting credit:', error);
+                    });
+                }
               })
-                .then((response) => response.json())
-                .then((creditData) => {
-                  console.log('Credit deducted:', creditData);
-                  currentUser.credits = creditData.credits;
-                })
-                .catch((error) => {
-                  console.error('Error deducting credit:', error);
-                });
-            }
-          })
-          .catch((error) => {
-            console.error('Error:', error);
-          });
+              .catch((error) => {
+                console.error('Error:', error);
+              });
+          } else {
+            alert('Audio file duration exceeds the allowed limit of 10 minutes.');
+          }
+        };
       } else {
         alert('Only .mp3, .wav, and .flac files are allowed.');
       }
@@ -155,7 +164,7 @@ export default function UploadSection({ onFileUpload, onProcessingDone }) {
             alignSelf="center"
             spacing={1}
             useFlexGap
-            sx={{ pt: 2, width: { xs: '100%', justifyContent: 'center', textAlign: 'center',} }}
+            sx={{ pt: 2, width: { xs: '100%', justifyContent: 'center', textAlign: 'center' } }}
           >
             {currentUser ? (
               <>
@@ -166,7 +175,7 @@ export default function UploadSection({ onFileUpload, onProcessingDone }) {
                   type="file"
                   onChange={handleInputChange}
                 />
-                <Stack spacing={1} alignItems="center" sx={{ pt: 2, width: { xs: '100%', justifyContent: 'center', textAlign: 'center',} }}>
+                <Stack spacing={1} alignItems="center" sx={{ pt: 2, width: { xs: '100%', justifyContent: 'center', textAlign: 'center' } }}>
                   <Button variant="contained" color="primary" component="span">
                     Upload Audio
                   </Button>
@@ -185,11 +194,10 @@ export default function UploadSection({ onFileUpload, onProcessingDone }) {
               </>
             ) : (
               <Typography variant="body1" textAlign="center" color="text.secondary">
-              Please <span style={{ color: 'white', fontWeight: 'bold' }}>sign in</span> to upload audio files.
+                Please <span style={{ color: 'white', fontWeight: 'bold' }}>sign in</span> to upload audio files.
               </Typography>
-
             )}
-            </Stack>
+          </Stack>
         </Stack>
       </Container>
     </Box>

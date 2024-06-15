@@ -157,6 +157,7 @@ function AppAppBarSignedIn({ mode, toggleColorMode}) {
                 size="small"
                 component="a"
                 sx={{ color: 'white' }}
+                href='/credits'
               >
               Credits: {currentUser.credits}
               </Button>

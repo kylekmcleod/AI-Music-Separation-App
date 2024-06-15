@@ -14,42 +14,34 @@ import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
 
 const tiers = [
   {
-    title: 'Free',
-    price: '0',
+    title: '3 Credits',
+    price: '2.99',
     description: [
-      '10 users included',
-      '2 GB of storage',
-      'Help center access',
-      'Email support',
+      '3 file uploads',
+      'Up to 10 minutes of audio',
     ],
-    buttonText: 'Sign up for free',
+    buttonText: 'Purchase',
     buttonVariant: 'outlined',
   },
   {
-    title: 'Professional',
+    title: '10 Credits',
     subheader: 'Recommended',
-    price: '15',
+    price: '7.99',
     description: [
-      '20 users included',
-      '10 GB of storage',
-      'Help center access',
-      'Priority email support',
-      'Dedicated team',
-      'Best deals',
+      '10 file uploads',
+      'Up to 10 minutes of audio',
     ],
-    buttonText: 'Start now',
-    buttonVariant: 'contained',
+    buttonText: 'Purchase',
+    buttonVariant: 'outlined',
   },
   {
-    title: 'Enterprise',
-    price: '30',
+    title: '50 Credits',
+    price: '29.99',
     description: [
-      '50 users included',
-      '30 GB of storage',
-      'Help center access',
-      'Phone & email support',
+      '50 file uploads',
+      'Up to 10 minutes of audio',
     ],
-    buttonText: 'Contact us',
+    buttonText: 'Purchase',
     buttonVariant: 'outlined',
   },
 ];
@@ -59,13 +51,11 @@ export default function Pricing() {
     <Container
       id="pricing"
       sx={{
-        pt: { xs: 4, sm: 12 },
         pb: { xs: 8, sm: 16 },
         position: 'relative',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        gap: { xs: 3, sm: 6 },
       }}
     >
       <Box
@@ -74,15 +64,6 @@ export default function Pricing() {
           textAlign: { sm: 'left', md: 'center' },
         }}
       >
-        <Typography component="h2" variant="h4" color="text.primary">
-          Pricing
-        </Typography>
-        <Typography variant="body1" color="text.secondary">
-          Quickly build an effective pricing table for your potential customers with
-          this layout. <br />
-          It&apos;s built with default Material UI components with little
-          customization.
-        </Typography>
       </Box>
       <Grid container spacing={3} alignItems="center" justifyContent="center">
         {tiers.map((tier) => (
@@ -99,13 +80,6 @@ export default function Pricing() {
                 display: 'flex',
                 flexDirection: 'column',
                 gap: 4,
-                border: tier.title === 'Professional' ? '1px solid' : undefined,
-                borderColor:
-                  tier.title === 'Professional' ? 'primary.main' : undefined,
-                background:
-                  tier.title === 'Professional'
-                    ? 'linear-gradient(#033363, #021F3B)'
-                    : undefined,
               }}
             >
               <CardContent>
@@ -115,47 +89,20 @@ export default function Pricing() {
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
-                    color:
-                      tier.title === 'Professional' ? 'primary.contrastText' : '',
                   }}
                 >
                   <Typography component="h3" variant="h6">
                     {tier.title}
                   </Typography>
-                  {tier.title === 'Professional' && (
-                    <Chip
-                      icon={<AutoAwesomeIcon />}
-                      label={tier.subheader}
-                      size="small"
-                      sx={{
-                        background: (theme) =>
-                          theme.palette.mode === 'light' ? '' : 'none',
-                        backgroundColor: 'primary.contrastText',
-                        '& .MuiChip-label': {
-                          color: 'primary.dark',
-                        },
-                        '& .MuiChip-icon': {
-                          color: 'primary.dark',
-                        },
-                      }}
-                    />
-                  )}
                 </Box>
                 <Box
                   sx={{
                     display: 'flex',
                     alignItems: 'baseline',
-                    color:
-                      tier.title === 'Professional'
-                        ? 'primary.contrastText'
-                        : undefined,
                   }}
                 >
                   <Typography component="h3" variant="h2">
                     ${tier.price}
-                  </Typography>
-                  <Typography component="h3" variant="h6">
-                    &nbsp; per month
                   </Typography>
                 </Box>
                 <Divider
@@ -179,20 +126,12 @@ export default function Pricing() {
                       sx={{
                         width: 20,
                         color:
-                          tier.title === 'Professional'
-                            ? 'primary.light'
-                            : 'primary.main',
+                          tier.title === 'primary.main',
                       }}
                     />
                     <Typography
                       component="text"
-                      variant="subtitle2"
-                      sx={{
-                        color:
-                          tier.title === 'Professional'
-                            ? 'primary.contrastText'
-                            : undefined,
-                      }}
+                      variant="subtitle3"
                     >
                       {line}
                     </Typography>
@@ -204,8 +143,7 @@ export default function Pricing() {
                   fullWidth
                   variant={tier.buttonVariant}
                   component="a"
-                  href="/material-ui/getting-started/templates/checkout/"
-                  target="_blank"
+                  href="/checkout/"
                 >
                   {tier.buttonText}
                 </Button>
