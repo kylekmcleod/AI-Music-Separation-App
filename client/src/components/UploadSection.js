@@ -7,13 +7,14 @@ import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import logo from '../images/stems.png';
-import { useCurrentUser } from '../App.js'
+import { useCurrentUser } from '../App.js';
 import { useTheme } from '@mui/material/styles';
 
-export default function UploadSection({onFileUpload, onProcessingDone}) {
+export default function UploadSection({ onFileUpload, onProcessingDone }) {
   const currentUser = useCurrentUser();
   const [dragging, setDragging] = React.useState(false);
   const theme = useTheme();
+
   const handleFileChange = (files) => {
     const file = files[0];
     if (currentUser.credits > 0) {
@@ -22,12 +23,13 @@ export default function UploadSection({onFileUpload, onProcessingDone}) {
         onFileUpload();
         const formData = new FormData();
         formData.append('audioFile', file);
-    
-        fetch('http://localhost:5000/upload', { 
+
+        fetch('http://localhost:5000/upload', {
           method: 'POST',
-          body: formData
-        }).then(response => response.json())
-          .then(data => {
+          body: formData,
+        })
+          .then((response) => response.json())
+          .then((data) => {
             console.log(data);
             onProcessingDone(data.isDone, data.files);
             if (data.isDone) {
@@ -35,17 +37,17 @@ export default function UploadSection({onFileUpload, onProcessingDone}) {
                 method: 'POST',
                 credentials: 'include',
               })
-                .then(response => response.json())
-                .then(creditData => {
+                .then((response) => response.json())
+                .then((creditData) => {
                   console.log('Credit deducted:', creditData);
                   currentUser.credits = creditData.credits;
                 })
-                .catch(error => {
+                .catch((error) => {
                   console.error('Error deducting credit:', error);
                 });
             }
           })
-          .catch(error => {
+          .catch((error) => {
             console.error('Error:', error);
           });
       } else {
@@ -85,15 +87,13 @@ export default function UploadSection({onFileUpload, onProcessingDone}) {
   return (
     <Box
       id="hero"
-      onDrop={handleDrop}
-      onDragOver={handleDragOver}
-      onDragLeave={handleDragLeave}
+      onDrop={currentUser ? handleDrop : null}
+      onDragOver={currentUser ? handleDragOver : null}
+      onDragLeave={currentUser ? handleDragLeave : null}
       sx={{
         width: '100%',
         backgroundImage: (theme) =>
-          theme.palette.mode === 'light'
-            ? ''
-            : '',
+          theme.palette.mode === 'light' ? '' : '',
         backgroundSize: '100% 100%',
         backgroundRepeat: 'no-repeat',
         border: '2px dashed',
@@ -157,31 +157,39 @@ export default function UploadSection({onFileUpload, onProcessingDone}) {
             useFlexGap
             sx={{ pt: 2, width: { xs: '100%', justifyContent: 'center', textAlign: 'center',} }}
           >
-            <input
-              accept=".mp3,.wav,.flac"
-              style={{ display: 'none' }}
-              id="upload-audio"
-              type="file"
-              onChange={handleInputChange}
-            />
-            <label htmlFor="upload-audio">
-              <Button variant="contained" color="primary" component="span">
-                Upload Audio
-              </Button>
-            </label>
-          </Stack>
+            {currentUser ? (
+              <>
+                <input
+                  accept=".mp3,.wav,.flac"
+                  style={{ display: 'none' }}
+                  id="upload-audio"
+                  type="file"
+                  onChange={handleInputChange}
+                />
+                <Stack spacing={1} alignItems="center" sx={{ pt: 2, width: { xs: '100%', justifyContent: 'center', textAlign: 'center',} }}>
+                  <Button variant="contained" color="primary" component="span">
+                    Upload Audio
+                  </Button>
 
-          <Typography variant="caption" textAlign="center" sx={{ opacity: 0.8, color: 'text.secondary' }}>
-            .mp3, .wav, .flac supported
-          </Typography>
+                  <Typography variant="caption" textAlign="center" sx={{ opacity: 0.8, color: 'text.secondary' }}>
+                    .mp3, .wav, .flac supported
+                  </Typography>
+                  <Typography variant="caption" textAlign="center" sx={{ opacity: 0.8 }}>
+                    By clicking &quot;Upload Audio&quot; you agree to our&nbsp;
+                    <Link href="/terms-of-service" color="primary">
+                      Terms & Conditions
+                    </Link>
+                    .
+                  </Typography>
+                </Stack>
+              </>
+            ) : (
+              <Typography variant="body1" textAlign="center" color="text.secondary">
+              Please <span style={{ color: 'white', fontWeight: 'bold' }}>sign in</span> to upload audio files.
+              </Typography>
 
-          <Typography variant="caption" textAlign="center" sx={{ opacity: 0.8 }}>
-            By clicking &quot;Upload Audio&quot; you agree to our&nbsp;
-            <Link href="/terms-of-service" color="primary">
-              Terms & Conditions
-            </Link>
-            .
-          </Typography>
+            )}
+            </Stack>
         </Stack>
       </Container>
     </Box>
