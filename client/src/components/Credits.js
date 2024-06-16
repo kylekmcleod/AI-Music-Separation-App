@@ -102,9 +102,15 @@ export default function Credits() {
         >
           <Typography variant="h2" sx={{ mt: 5, color: 'white', textAlign: 'center'}}>
             Credits
-            <Typography variant="h5" sx={{ pt: 1, fontWeight: '300', color: 'white', textAlign: 'left' }}>
+
+            <Typography variant="h5" sx={{ pt: 0, fontWeight: '300', color: 'white', textAlign: 'center' }}>
             You have <strong style={{ color: '#EF4A40' }}>{currentUser.credits}</strong> conversion credits.
             </Typography>
+
+            <Typography variant="body1" sx={{ pt: 1, fontWeight: '300', color: 'white', textAlign: 'center' }}>
+            Purchase more credits below.
+            </Typography>
+
           </Typography>
 
           <Pricing />
