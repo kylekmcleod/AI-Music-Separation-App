@@ -33,7 +33,7 @@ This is my personal project Song Seperator. It is a web application that allows 
 2. Type ```npm install``` to install dependencies.
 3. Press CTRL + SHIFT + P to locate and select "Python: Create Enviroment".
 4. Select .venv.
-5. Select Python 3.8.10.
+5. Select Python 3.8.8.
 6. Drag .venv folder into server directory.
 7. Open powershell as administrator and type ```powershell Set-ExecutionPolicy RemoteSigned```.
 8. In VSCode /server terminal, type ```.venv\Scripts\activate```.
