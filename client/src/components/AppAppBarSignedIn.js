@@ -118,22 +118,6 @@ function AppAppBarSignedIn({ mode, toggleColorMode}) {
               </a>
               <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
                 <MenuItem
-                  onClick={() => scrollToSection('highlights')}
-                  sx={{ py: '6px', px: '12px' }}
-                >
-                  <Typography variant="body2" color="text.primary">
-                    About
-                  </Typography>
-                </MenuItem>
-                <MenuItem
-                  onClick={() => scrollToSection('faq')}
-                  sx={{ py: '6px', px: '12px' }}
-                >
-                  <Typography variant="body2" color="text.primary">
-                    FAQ
-                  </Typography>
-                </MenuItem>
-                <MenuItem
                   onClick={() => navigate('/browse-samples')}
                   sx={{ py: '6px', px: '12px' }}
                 >
@@ -151,17 +135,16 @@ function AppAppBarSignedIn({ mode, toggleColorMode}) {
               }}
             >
               {/* <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} /> */}
-              <Button
+              <Button onClick={() => navigate('/credits')}
                 color="primary"
                 variant="text"
                 size="small"
                 component="a"
                 sx={{ color: 'white' }}
-                href='/credits'
               >
               Credits: {currentUser.credits}
               </Button>
-              <Button
+              <Button onClick = {() => navigate('/profile')}
                 color="primary"
                 variant="text"
                 size="small"
@@ -209,22 +192,15 @@ function AppAppBarSignedIn({ mode, toggleColorMode}) {
                   >
                     {/* <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} /> */}
                   </Box>
-                  <MenuItem onClick={() => scrollToSection('highlights')}>
-                    About
-                  </MenuItem>
-                  <MenuItem onClick={() => scrollToSection('faq')}>
-                    FAQ
-                  </MenuItem>
                   <MenuItem onClick={() => navigate('/browse-samples')}>
                     Browse Samples
                   </MenuItem>
                   <Divider />
                   <MenuItem>
-                    <Button
+                    <Button onClick={() => navigate('/profile')}
                       color="primary"
                       variant="contained"
                       component="a"
-                      target="_blank"
                       sx={{ width: '100%'}}
                     >
                       {currentUser.email}

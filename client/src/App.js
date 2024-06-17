@@ -9,6 +9,7 @@ import BrowseSamples from './components/BrowseSamples';
 import axios from 'axios';
 import Loading from './components/Loading';
 import Credits from './components/Credits';
+import Profile from './components/Profile'
 
 const UserContext = createContext();
 
@@ -49,6 +50,7 @@ function App() {
           <Route path="/sign-up" element={currentUser ? <Navigate to="/" /> : <SignUp />} />
           <Route path="/browse-samples" element={<BrowseSamples />} />
           <Route path="/credits" element={<Credits />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </Router>
     </UserContext.Provider>
