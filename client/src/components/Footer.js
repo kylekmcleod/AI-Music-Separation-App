@@ -13,7 +13,7 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import TwitterIcon from '@mui/icons-material/X';
 
 import { useTheme } from '@mui/material/styles';
-
+import { Navigate, useNavigate } from 'react-router-dom';
 const logoStyle = {
   width: '140px',
   height: 'auto',
@@ -30,6 +30,7 @@ function Copyright() {
 }
 
 export default function Footer() {
+  const Navigate = useNavigate();
   const theme = useTheme();
   return (
     <Container
@@ -84,15 +85,6 @@ export default function Footer() {
             gap: 1,
           }}
         >
-          <Typography variant="body2" fontWeight={600}>
-            Product
-          </Typography>
-          <Link color="text.secondary" href="/">
-            About
-          </Link>
-          <Link color="text.secondary" href="/">
-            FAQs
-          </Link>
         </Box>
         <Box
           sx={{
@@ -101,12 +93,6 @@ export default function Footer() {
             gap: 1,
           }}
         >
-          <Typography variant="body2" fontWeight={600}>
-            Company
-          </Typography>
-          <Link color="text.secondary" href="#">
-            About us
-          </Link>
         </Box>
         <Box
           sx={{
@@ -118,10 +104,18 @@ export default function Footer() {
           <Typography variant="body2" fontWeight={600}>
             Legal
           </Typography>
-          <Link color="text.secondary" href="/terms-of-service">
-            Terms
+          <Link
+            color="text.secondary"
+            onClick={() => Navigate('/terms-of-service')}
+            href="#"
+          >
+            Terms & Conditions
           </Link>
-          <Link color="text.secondary" href="privacy-policy">
+          <Link
+            color="text.secondary"
+            onClick={() => Navigate('/privacy-policy')}
+            href="#"
+          >
             Privacy
           </Link>
           <Link color="text.secondary" href="#">
