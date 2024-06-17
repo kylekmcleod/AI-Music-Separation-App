@@ -202,6 +202,9 @@ function AppAppBarSignedIn({ mode, toggleColorMode}) {
                   <MenuItem onClick={() => navigate('/browse-samples')}>
                     Browse Samples
                   </MenuItem>
+                  <MenuItem onClick={() => navigate('/my-samples')}>
+                    My Samples
+                  </MenuItem>
                   <Divider />
                   <MenuItem>
                     <Button onClick={() => navigate('/profile')}
@@ -218,16 +221,20 @@ function AppAppBarSignedIn({ mode, toggleColorMode}) {
                       color="primary"
                       variant="outlined"
                       component="a"
-                      target="_blank"
                       sx={{ width: '100%' }}
                       onClick = {handleSignOut}
                     >
                       Sign Out
                     </Button>
                   </MenuItem>
-                  <Typography variant="body1" color="text.primary" textAlign = "center">
+                  <Button 
+                    variant="body1" 
+                    color="text.primary" 
+                    textAlign = "center"
+                    onClick = {() => navigate('/credits')}
+                  >
                     Credits: {currentUser.credits}
-                  </Typography>
+                  </Button>
                 </Box>
               </Drawer>
             </Box>
