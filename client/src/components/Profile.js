@@ -13,6 +13,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { useCurrentUser } from '../App.js'
 import AppAppBarSignedIn from './AppAppBarSignedIn';
+import { useNavigate } from 'react-router-dom';
 
 const defaultTheme = createTheme({});
 
@@ -51,6 +52,7 @@ ToggleCustomTheme.propTypes = {
   toggleCustomTheme: PropTypes.func.isRequired,
 };
 
+
 export default function Profile() {
   const currentUser = useCurrentUser();
   const [mode, setMode] = React.useState('dark');
@@ -64,6 +66,18 @@ export default function Profile() {
   const toggleCustomTheme = () => {
     setShowCustomTheme((prev) => !prev);
   };
+
+  const navigate = useNavigate();
+  React.useEffect(() => {
+    if (!currentUser) {
+      navigate('/');
+    }
+  }, [currentUser, navigate]);
+
+  if (!currentUser) {
+    return null; 
+  }
+
 
   return (
     <ThemeProvider theme={showCustomTheme ? LPtheme : defaultTheme}>
@@ -87,6 +101,16 @@ export default function Profile() {
             gap: { xs: 3, sm: 6 },
           }}
         >
+        <Box variant="outlined" sx={{ width: '100%', maxWidth: 600}}>
+
+        <Typography variant="h6" gutterBottom sx={{pt:2}}>
+            Personal Information
+            <Typography variant="body2" gutterBottom sx={{pb:2}}>
+                Edit your profile.
+            </Typography>
+        </Typography>
+        <Divider />
+        </Box>
 
 
         </Container>
