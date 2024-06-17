@@ -60,7 +60,7 @@ export default function FAQ() {
               gutterBottom
               sx={{ maxWidth: { sm: '100%', md: '70%' },  color: 'text.secondary' }}
             >
-              Yes, the Music Splitter feature is available for free, allowing users to separate mixed audio tracks into individual components. However, each user account comes with a limited number of credits. These credits are used for accessing premium features or for additional usage beyond the free tier. For more details on credit usage and premium features, please refer to our pricing page.
+              Yes, Song Seperator is free to use with the daily credits provided. You can also purchase additional credits to use our service more frequently.
             </Typography>
           </AccordionDetails>
         </Accordion>
@@ -83,9 +83,10 @@ export default function FAQ() {
               gutterBottom
               sx={{ maxWidth: { sm: '100%', md: '70%' },  color: 'text.secondary' }}
             >
-              Audio stems are individual tracks or components that constitute a mixed audio recording. For instance, in a music track, stems could include separate files for vocals, drums, bass, guitar, and other instruments. These stems enable users to manipulate and edit specific elements of the audio independently, offering greater flexibility in audio production and remixing.
+              Audio stems are individual tracks or components that constitute a mixed audio recording. For instance, in a music track, stems could include separate files for vocals, drums, bass, guitar, and other instruments.
             </Typography>
           </AccordionDetails>
+          
         </Accordion>
         <Accordion
           expanded={expanded === 'panel3'}
@@ -107,6 +108,29 @@ export default function FAQ() {
               sx={{ maxWidth: { sm: '100%', md: '70%' },  color: 'text.secondary' }}
             >
               Accepted formats include MP3, WAV, and FLAC.
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
+        <Accordion
+          expanded={expanded === 'panel4'}
+          onChange={handleChange('panel4')}
+        >
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel4d-content"
+            id="panel4d-header"
+          >
+            <Typography component="h3" variant="subtitle2">
+            How long of an audio file can I upload?
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography
+              variant="body3"
+              gutterBottom
+              sx={{ maxWidth: { sm: '100%', md: '70%' },  color: 'text.secondary' }}
+            >
+              Users can upload audio files less than 10 minutes in length.
             </Typography>
           </AccordionDetails>
         </Accordion>
