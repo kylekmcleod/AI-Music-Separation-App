@@ -26,7 +26,6 @@ const logoStyle = {
 
 function AppAppBarSignedIn({ mode, toggleColorMode}) {
   const currentUser = useCurrentUser();
-  console.log(currentUser);
   const navigate = useNavigate();
 
   const [open, setOpen] = React.useState(false);
