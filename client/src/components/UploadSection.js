@@ -9,11 +9,12 @@ import Typography from '@mui/material/Typography';
 import logo from '../images/stems.png';
 import { useCurrentUser } from '../App.js';
 import { useTheme } from '@mui/material/styles';
-
+import { Navigate, useNavigate } from 'react-router-dom';
 export default function UploadSection({ onFileUpload, onProcessingDone }) {
   const currentUser = useCurrentUser();
   const [dragging, setDragging] = React.useState(false);
   const theme = useTheme();
+  const Navigate = useNavigate();
 
   const handleFileChange = (files) => {
     const file = files[0];
@@ -185,7 +186,11 @@ export default function UploadSection({ onFileUpload, onProcessingDone }) {
                   </Typography>
                   <Typography variant="caption" textAlign="center" sx={{ opacity: 0.8 }}>
                     By clicking &quot;Upload Audio&quot; you agree to our&nbsp;
-                    <Link href="/terms-of-service" color="primary">
+                    <Link
+                      color="primary"
+                      onClick={() => Navigate('/terms-of-service')}
+                      href="#"
+                    >
                       Terms & Conditions
                     </Link>
                     .
