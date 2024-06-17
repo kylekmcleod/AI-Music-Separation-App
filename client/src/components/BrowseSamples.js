@@ -91,7 +91,7 @@ export default function BrowseSamples() {
             position: 'relative',
             display: 'flex',
             flexDirection: 'column',
-            alignItems: 'center',
+            alignItems: 'left',
             gap: { xs: 3, sm: 6 },
           }}
         >
