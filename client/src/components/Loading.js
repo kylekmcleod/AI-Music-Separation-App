@@ -18,7 +18,9 @@ export default function Loading() {
         overflow: 'hidden',
       }}
     >
-      <CircularProgress color="primary" />
+      <CircularProgress 
+        sx={{ color: '#EF4A40' }}
+      />
     </Box>
   );
 }
