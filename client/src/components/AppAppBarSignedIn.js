@@ -124,6 +124,14 @@ function AppAppBarSignedIn({ mode, toggleColorMode}) {
                     Browse Samples
                   </Typography>
                 </MenuItem>
+                <MenuItem
+                  onClick={() => navigate('/my-samples')}
+                  sx={{ py: '6px', px: '12px' }}
+                >
+                  <Typography variant="body2" color="text.primary">
+                    My Samples
+                  </Typography>
+                </MenuItem>
               </Box>
             </Box>
             <Box
