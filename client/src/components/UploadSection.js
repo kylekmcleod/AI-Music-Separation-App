@@ -24,38 +24,44 @@ export default function UploadSection({ onFileUpload, onProcessingDone }) {
         audio.src = URL.createObjectURL(file);
         audio.onloadedmetadata = () => {
           const duration = audio.duration;
+          const size = file.size;
+  
           if (duration <= 600) { // Check if file is less than 10 minutes
-            console.log('File uploaded:', file);
-            onFileUpload();
-            const formData = new FormData();
-            formData.append('audioFile', file);
-
-            fetch('http://localhost:5000/upload', {
-              method: 'POST',
-              body: formData,
-            })
-              .then((response) => response.json())
-              .then((data) => {
-                console.log(data);
-                onProcessingDone(data.isDone, data.files);
-                if (data.isDone) {
-                  fetch('http://localhost:5000/deduct-credit', {
-                    method: 'POST',
-                    credentials: 'include',
-                  })
-                    .then((response) => response.json())
-                    .then((creditData) => {
-                      console.log('Credit deducted:', creditData);
-                      currentUser.credits = creditData.credits;
-                    })
-                    .catch((error) => {
-                      console.error('Error deducting credit:', error);
-                    });
-                }
+            if (size <= 100000000) { // Check if file is less than 100MB (100000000 bytes)
+              console.log('File uploaded:', file);
+              onFileUpload();
+              const formData = new FormData();
+              formData.append('audioFile', file);
+  
+              fetch('http://localhost:5000/upload', {
+                method: 'POST',
+                body: formData,
               })
-              .catch((error) => {
-                console.error('Error:', error);
-              });
+                .then((response) => response.json())
+                .then((data) => {
+                  console.log(data);
+                  onProcessingDone(data.isDone, data.files);
+                  if (data.isDone) {
+                    fetch('http://localhost:5000/deduct-credit', {
+                      method: 'POST',
+                      credentials: 'include',
+                    })
+                      .then((response) => response.json())
+                      .then((creditData) => {
+                        console.log('Credit deducted:', creditData);
+                        currentUser.credits = creditData.credits;
+                      })
+                      .catch((error) => {
+                        console.error('Error deducting credit:', error);
+                      });
+                  }
+                })
+                .catch((error) => {
+                  console.error('Error:', error);
+                });
+            } else {
+              alert('Audio file size exceeds the allowed limit of 100MB.');
+            }
           } else {
             alert('Audio file duration exceeds the allowed limit of 10 minutes.');
           }
@@ -67,6 +73,7 @@ export default function UploadSection({ onFileUpload, onProcessingDone }) {
       alert('You do not have enough credits to process this file.');
     }
   };
+  
 
   const handleDrop = (event) => {
     event.preventDefault();
