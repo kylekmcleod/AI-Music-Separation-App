@@ -105,22 +105,33 @@ export default function TermsOfService() {
           <Typography variant="h6" sx={{ mt: 2, fontWeight: 'bold', color: 'primary.main'}}>Introduction</Typography>
           Welcome to our AI Music Splitter, provided by SongSeperator ("we", "us", or "our"). By using our website and services, you agree to comply with and be bound by the following terms and conditions ("Terms"). Please read these Terms carefully before accessing or using our website or services.
 
-          <Typography variant="h6" sx={{ mt: 2, fontWeight: 'bold', color: 'primary.main'}}>1. Acceptance of Terms</Typography>
+          <Typography variant="h6" sx={{ mt: 2, fontWeight: 'bold', color: 'primary.main'}}>Acceptance of Terms</Typography>
           By accessing or using our website or services, you agree to be bound by these Terms. If you disagree with any part of the Terms, you may not access our website or use our services.
 
-          <Typography variant="h6" sx={{ mt: 2, fontWeight: 'bold', color: 'primary.main'}}>2. Description of Service</Typography>
+          <Typography variant="h6" sx={{ mt: 2, fontWeight: 'bold', color: 'primary.main'}}>Description of Service</Typography>
           Song Seperator is an advanced audio track splitter that allows users to effortlessly extract and separate the various layers of any song. Our service supports .mp3, .wav, and .flac audio formats.
 
-          <Typography variant="h6" sx={{ mt: 2, fontWeight: 'bold', color: 'primary.main'}}>3. Usage Policies</Typography>
-          You agree to use our website and services only for lawful purposes and in accordance with these Terms. You may not use our website or services for any illegal or unauthorized purpose.
+          <Typography variant="h6" sx={{ mt: 2, fontWeight: 'bold', color: 'primary.main'}}>Limits</Typography>
+          You acknowledge and agree that Song Separator imposes limits on the size and number of requests you may send to the Service. Song Separator may change these limits at any time, at Song Separator’s sole discretion.
 
-          <Typography variant="h6" sx={{ mt: 2, fontWeight: 'bold', color: 'primary.main'}}>4. Intellectual Property</Typography>
+          <Typography variant="h6" sx={{ mt: 2, fontWeight: 'bold', color: 'primary.main'}}>Payment</Typography>
+          Listed prices are in U.S. dollars (USD) and include any sales tax (VAT) when applicable. The charged prices are equal to the listed prices regardless of the amount of sales tax to be paid. Payments are not refundable.
+          Song Separator uses a credit system. Each user is allocated a certain number of credits. If you do not have sufficient credits, you may not be able to use the Song Separator service.
+
+          <Typography variant="h6" sx={{ mt: 2, fontWeight: 'bold', color: 'primary.main'}}>Usage Policies</Typography>
+          You represent and warrant that your use of the Song Separator service will not infringe the proprietary rights, including but not limited to the copyright, 
+          patent, trademark, or trade secret rights, of any third party. You affirm that you have legal authorization to modify files and submit YouTube videos for 
+          separation using the Song Separator service, and that the content you submit does not contain or install any viruses, worms, malware, Trojan horses, or other 
+          harmful or destructive content. Furthermore, you agree not to use the Song Separator service in any manner that may disable, damage, or overburden it. Your use 
+          of the Song Separator service will be in strict accordance with this Agreement and with all applicable laws and regulations, including without limitation any 
+          local laws or regulations in your country, state, city, or other governmental area. Song Separator reserves the right, in its sole discretion, to refuse or 
+          remove content, terminate any subscription, and deny or limit access to use of the Song Separator service to any individual or entity if the terms of this Agreement 
+          are violated.
+
+          <Typography variant="h6" sx={{ mt: 2, fontWeight: 'bold', color: 'primary.main'}}>Intellectual Property</Typography>
           All content and materials available on our website, including but not limited to logos, text, graphics, images, and software, are the property of SongSeperator and are protected by copyright and other intellectual property laws.
         
-          <Typography variant="h6" sx={{ mt: 2, fontWeight: 'bold', color: 'primary.main'}}>5. Privacy Policy</Typography>
-          Your use of our website and services is also subject to our Privacy Policy. Please review our Privacy Policy to understand how we collect, use, and protect your personal information.
-        
-          <Typography variant="h6" sx={{ mt: 2, fontWeight: 'bold', color: 'primary.main'}}>6. Changes to Terms</Typography>
+          <Typography variant="h6" sx={{ mt: 2, fontWeight: 'bold', color: 'primary.main'}}>Changes to Terms</Typography>
           We reserve the right to update or modify these Terms at any time without prior notice. By continuing to access or use our website or services after any changes to these Terms, you agree to be bound by the updated Terms.
         </Typography>
 
