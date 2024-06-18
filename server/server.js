@@ -8,6 +8,7 @@ const fs = require('fs');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
+const rateLimit = require('express-rate-limit');
 require('dotenv').config();
 
 // Express app
@@ -37,6 +38,12 @@ app.use(session({
     maxAge: 24 * 60 * 60 * 1000,
   }
 }));
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+  message: 'Too many requests from this IP, please try again after 15 minutes'
+});
+app.use(limiter);
 
 // Mongoose connection
 const collection = require('./src/mongodb.js');
