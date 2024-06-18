@@ -219,7 +219,45 @@ app.post('/deduct-credit', async (req, res) => {
   }
 });
 
+// Update profile
+app.post('/update-profile', async (req, res) => {
+    const { firstName, lastName, email } = req.body;
 
+
+    // Check for valid email format
+    if (!/^\S+@\S+\.\S+$/.test(email)) {
+      return res.status(400).json({ message: 'Email must be in a valid format' });
+    }
+    // Check if user is authenticated
+    if(!req.session.user){
+        return res.status(401).json({message: 'Not authenticated'});
+    }
+
+    try{
+      const user = await userModel.findById(req.session.user._id);
+        if(!user) {
+            return res.status(404).json({message: 'User not found'});
+        }
+        if(email !== user.email){
+            const existingUser = await userModel.findOne({email});
+            if(existingUser){
+                return res.status(400).json({message: 'Email already in use'});
+            }
+        }
+
+        user.firstName = firstName;
+        user.lastName = lastName;
+        user.email = email;
+
+        await user.save();
+        req.session.user = user;
+        res.json({message: 'Profile updated', user});
+
+    } catch (error) {
+        console.error('Error updating profile:', error);
+        res.status(500).json({message: 'Error updating profile', error: error.message});
+    }
+});
 
 
 // App listening
