@@ -44,6 +44,13 @@ const limiter = rateLimit({
   message: 'Too many requests from this IP, please try again after 15 minutes'
 });
 app.use(limiter);
+const preventCaching = (req, res, next) => {
+  res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+  res.header('Expires', '-1');
+  res.header('Pragma', 'no-cache');
+  next();
+};
+app.use(preventCaching);
 
 // Mongoose connection
 const collection = require('./src/mongodb.js');
