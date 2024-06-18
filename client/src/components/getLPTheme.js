@@ -585,10 +585,10 @@ export default function getLPTheme(mode) {
               },
             },
             '& .MuiInputLabel-outlined.Mui-focused': {
-              transform: 'translate(14px, -6px) scale(0.75)', // Adjust based on your design
+              transform: 'translate(14px, -6px) scale(0.75)',
             },
             '& .MuiInputLabel-outlined.MuiInputLabel-shrink': {
-              transform: 'translate(14px, -6px) scale(0.75)', // Adjust based on your design
+              transform: 'translate(14px, -6px) scale(0.75)',
             },
             ...(theme.palette.mode === 'dark' && {
               '& .MuiOutlinedInput-root': {
@@ -596,7 +596,7 @@ export default function getLPTheme(mode) {
                 borderColor: gray[600],
                 minWidth: 280,
                 minHeight: 40,
-                border: '1px solid',
+                border: '0px solid',
                 transition: 'border-color 120ms ease-in',
                 '& fieldset': {
                   boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.4)',
