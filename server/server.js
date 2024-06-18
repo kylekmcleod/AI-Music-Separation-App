@@ -138,7 +138,7 @@ app.get('/download', (req, res) => {
 
 // Sign up
 app.post('/signup', async (req, res) => {
-  const { email, password } = req.body;
+  const { firstName, lastName, email, password } = req.body;
   
   try {
     const existingUser = await userModel.findOne({ email });
@@ -147,7 +147,7 @@ app.post('/signup', async (req, res) => {
       return res.status(400).json({ message: 'Email already in use' });
     }
     
-    const user = await userModel.create({ email, password });
+    const user = await userModel.create({ firstName, lastName, email, password });
     req.session.user = user;
     
     res.json(user);
