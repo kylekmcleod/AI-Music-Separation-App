@@ -121,7 +121,7 @@ export default function FAQ() {
             id="panel4d-header"
           >
             <Typography component="h3" variant="subtitle2">
-            How long of an audio file can I upload?
+            How long and how large of an audio file can I upload?
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -130,7 +130,7 @@ export default function FAQ() {
               gutterBottom
               sx={{ maxWidth: { sm: '100%', md: '70%' },  color: 'text.secondary' }}
             >
-              Users can upload audio files less than 10 minutes in length.
+              Users can upload audio files less than 10 minutes in length and under 100 MB in size.
             </Typography>
           </AccordionDetails>
         </Accordion>
