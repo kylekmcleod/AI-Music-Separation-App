@@ -273,6 +273,16 @@ app.post('/update-profile', async (req, res) => {
     }
 });
 
+// Get samples
+app.get('/get-samples', async (req, res) => {
+  try {
+    const files = await fileModel.find();
+    res.json(files);
+  } catch (error) {
+    console.error('Error getting samples:', error);
+    res.status(500).json({ message: 'Error getting samples', error: error.message });
+  }
+});
 
 // App listening
 app.listen(5000, () => {
