@@ -16,6 +16,7 @@ import Paper from '@mui/material/Paper';
 import { TextField } from '@mui/material';
 import { useCurrentUser } from '../App.js'
 import AppAppBarSignedIn from './AppAppBarSignedIn';
+import Button from '@mui/material/Button';
 
 const defaultTheme = createTheme({});
 
@@ -59,6 +60,7 @@ export default function BrowseSamples() {
   const [mode, setMode] = React.useState('dark');
   const [showCustomTheme, setShowCustomTheme] = React.useState(true);
   const LPtheme = createTheme(getLPTheme(mode));
+  const [samples, setSamples] = React.useState([]);
 
   const toggleColorMode = () => {
     setMode((prev) => (prev === 'dark' ? 'light' : 'dark'));
@@ -70,8 +72,18 @@ export default function BrowseSamples() {
 
   React.useEffect(() => {
     window.scrollTo(0, 0);
+    fetchSamples();
   }, []);
 
+  const fetchSamples = async () => {
+    try{
+      const response = await fetch('http://localhost:5000/get-samples');
+      const data = await response.json();
+      setSamples(data);
+    } catch (error) {
+      console.error('Error fetching samples:', error);
+    }
+  };
 
   return (
     <ThemeProvider theme={showCustomTheme ? LPtheme : defaultTheme}>
@@ -111,23 +123,53 @@ export default function BrowseSamples() {
         />
 
 
-        <Grid container spacing={3}>
-            {Array.from(Array(9).keys()).map((item) => (
-              <Grid item xs={12} key={item}>
-                <Paper
-                  elevation={3}
-                  sx={{
-                    padding: 2,
-                    textAlign: 'center',
-                    color: 'text.primary',
-                    backgroundColor: 'background.paper',
-                    borderRadius: 2,
-                    minHeight: '150px',
-                  }}
-                >
-                  <Typography variant="h6" sx={{ textAlign: 'left', fontWeight: 'bold', pl: 2}}>Title of Sample Here {item + 1}</Typography>
-                </Paper>
-              </Grid>
+          <Grid container spacing={3}>
+            {samples.map((sample, index) => (
+              <Grid item xs={12} sm={6} key={index}>
+              <Paper
+                elevation={3}
+                sx={{
+                  padding: 2,
+                  textAlign: 'left',
+                  color: 'text.primary',
+                  backgroundColor: 'background.paper',
+                  borderRadius: 2,
+                  minHeight: '180px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                }}
+              >
+                <div>
+                  <Typography variant="h6" sx={{ textAlign: 'left', fontWeight: 'bold', mb: 1 }}>
+                    {`Sample ${index + 1}`}
+                    <Typography variant="body1" sx={{ textAlign: 'left', mb: 1 }}>
+                      <a>{sample._id}</a>
+                    </Typography>
+                  </Typography>
+                </div>
+            
+                <div style={{ marginTop: 'auto', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    size="small"
+                    download
+                  >
+                    &#9825; Like
+                  </Button>
+                  
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    size="small"
+                    download
+                  >
+                    View Sample
+                  </Button>
+                </div>
+              </Paper>
+            </Grid>
+            
             ))}
           </Grid>
 
