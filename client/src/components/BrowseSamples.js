@@ -1,6 +1,5 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
@@ -14,7 +13,7 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import { TextField } from '@mui/material';
-import { useCurrentUser } from '../App.js'
+import { useCurrentUser } from '../App.js';
 import AppAppBarSignedIn from './AppAppBarSignedIn';
 import Button from '@mui/material/Button';
 
@@ -61,6 +60,8 @@ export default function BrowseSamples() {
   const [showCustomTheme, setShowCustomTheme] = React.useState(true);
   const LPtheme = createTheme(getLPTheme(mode));
   const [samples, setSamples] = React.useState([]);
+  const [filteredSamples, setFilteredSamples] = React.useState([]);
+  const [searchQuery, setSearchQuery] = React.useState('');
 
   const toggleColorMode = () => {
     setMode((prev) => (prev === 'dark' ? 'light' : 'dark'));
@@ -76,13 +77,34 @@ export default function BrowseSamples() {
   }, []);
 
   const fetchSamples = async () => {
-    try{
+    try {
       const response = await fetch('http://localhost:5000/get-samples');
       const data = await response.json();
       setSamples(data);
+      setFilteredSamples(data);
     } catch (error) {
       console.error('Error fetching samples:', error);
     }
+  };
+
+  // Function to handle search query change
+  const handleSearchChange = (event) => {
+    const { value } = event.target;
+    setSearchQuery(value);
+
+  // Filter samples based on search query
+  const filtered = samples.filter((sample) =>
+    sample._id.toLowerCase().includes(value.toLowerCase())
+    );
+    setFilteredSamples(filtered);
+  };
+
+  // Function to limit the characters in sample ID
+  const limitCharacters = (text, limit) => {
+    if (text.length > limit) {
+      return text.slice(0, limit) + '...';
+    }
+    return text;
   };
 
   return (
@@ -96,7 +118,7 @@ export default function BrowseSamples() {
       <Box sx={{ bgcolor: 'background.default' }}>
         <Divider />
         <Container
-        id="faq"
+          id="faq"
           sx={{
             pt: { xs: 4, sm: 12 },
             pb: { xs: 8, sm: 16 },
@@ -107,69 +129,67 @@ export default function BrowseSamples() {
             gap: { xs: 3, sm: 6 },
           }}
         >
+          <Typography variant="h6" sx={{ textAlign: 'justify', mt: 2, color: 'text.secondary' }}>
+            <Typography variant="h2" sx={{ mt: 2, fontWeight: 'bold', color: 'white' }}>Browse Samples</Typography>
+            To get your upload listed here, you must upload a file and agree to share your sample publicly. Please ensure that the content complies with our community guidelines before submitting.
+          </Typography>
 
-        <Typography variant="h6" sx={{ textAlign: 'justify', mt: 2, color: 'text.secondary' }}>
-          <Typography variant="h2" sx={{ mt: 2, fontWeight: 'bold', color: 'white'}}>Browse Samples</Typography>
-          To get your upload listed here, you must upload a file and agree to share your sample publicly. Please ensure that the content complies with our community guidelines before submitting.
-        </Typography>
-
-        <TextField
+          <TextField
             id="search"
             label="Search"
             variant="outlined"
             size="small"
             fullWidth
+            value={searchQuery}
+            onChange={handleSearchChange}
             InputProps={{ style: { width: '50%', textAlign: 'left' } }}
-        />
-
+          />
 
           <Grid container spacing={3}>
-            {samples.map((sample, index) => (
+            {filteredSamples.map((sample, index) => (
               <Grid item xs={12} sm={6} key={index}>
-              <Paper
-                elevation={3}
-                sx={{
-                  padding: 2,
-                  textAlign: 'left',
-                  color: 'text.primary',
-                  backgroundColor: 'background.paper',
-                  borderRadius: 2,
-                  minHeight: '180px',
-                  display: 'flex',
-                  flexDirection: 'column',
-                }}
-              >
-                <div>
-                  <Typography variant="h6" sx={{ textAlign: 'left', fontWeight: 'bold', mb: 1 }}>
-                    {`Sample ${index + 1}`}
-                    <Typography variant="body1" sx={{ textAlign: 'left', mb: 1 }}>
-                      <a>{sample._id}</a>
+                <Paper
+                  elevation={3}
+                  sx={{
+                    padding: 2,
+                    textAlign: 'left',
+                    color: 'text.primary',
+                    backgroundColor: 'background.paper',
+                    borderRadius: 2,
+                    minHeight: '180px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                  }}
+                >
+                  <div>
+                    <Typography variant="h6" sx={{ textAlign: 'left', fontWeight: 'bold', mb: 1 }}>
+                      {limitCharacters(sample._id, 50)}
                     </Typography>
-                  </Typography>
-                </div>
-            
-                <div style={{ marginTop: 'auto', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
-                  <Button
-                    variant="outlined"
-                    color="primary"
-                    size="small"
-                    download
-                  >
-                    &#9825; Like
-                  </Button>
-                  
-                  <Button
-                    variant="outlined"
-                    color="primary"
-                    size="small"
-                    download
-                  >
-                    View Sample
-                  </Button>
-                </div>
-              </Paper>
-            </Grid>
-            
+                  </div>
+
+                  <div style={{ marginTop: 'auto', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+                    <Button
+                      variant="outlined"
+                      color="primary"
+                      size="small"
+                      download
+                      style={{ marginLeft: '10px' }}
+                    >
+                      &#9825; Like
+                    </Button>
+
+                    <Button
+                      variant="outlined"
+                      color="primary"
+                      size="small"
+                      download
+                      style={{ marginRight: '10px' }}
+                    >
+                      View Sample
+                    </Button>
+                  </div>
+                </Paper>
+              </Grid>
             ))}
           </Grid>
 
