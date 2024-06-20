@@ -108,7 +108,7 @@ export default function Credits() {
             </Typography>
 
             <Typography variant="body1" sx={{ pt: 1, fontWeight: '300', color: 'white', textAlign: 'center' }}>
-            Purchase more credits below.
+            Credits are used to upload files. Each file upload takes 1 credit. You can purchase more credits below to use toward more file uploads.
             </Typography>
 
           </Typography>
