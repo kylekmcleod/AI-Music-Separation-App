@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import { Typography } from '@mui/material';
+import { Typography, Slider } from '@mui/material';
 import Button from '@mui/material/Button';
 import WaveSurfer from 'wavesurfer.js';
 
@@ -26,24 +26,23 @@ export default function TrackPlayer({ files }) {
   };
 
   const [loadingError, setLoadingError] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
 
-
-      console.log('Files:', files);
+  console.log('Files:', files);
   
-      // Bass track
-      tracks.bass = files.find((file) => file.name === 'bass.wav');
+  // Bass track
+  tracks.bass = files.find((file) => file.name === 'bass.wav');
   
-      // Drums track
-      tracks.drums = files.find((file) => file.name === 'drums.wav');
-
-  
-      // Vocals track
-      tracks.vocals = files.find((file) => file.name === 'vocals.wav');
+  // Drums track
+  tracks.drums = files.find((file) => file.name === 'drums.wav');
 
   
-      // Other track
-      tracks.other = files.find((file) => file.name === 'other.wav');
+  // Vocals track
+  tracks.vocals = files.find((file) => file.name === 'vocals.wav');
 
+  
+  // Other track
+  tracks.other = files.find((file) => file.name === 'other.wav');
 
   useEffect(() => {
     Object.keys(tracks).forEach((key) => {
@@ -51,7 +50,7 @@ export default function TrackPlayer({ files }) {
         wavesurfers[key].current = WaveSurfer.create({
           container: waveformRefs[key].current,
           waveColor: 'rgb(255, 255, 255)',
-          progressColor: '#EF4A40',
+          progressColor: '#adadad',
           backend: 'WebAudio',
           cursorWidth: 1,
           barWidth: 2,
@@ -76,13 +75,18 @@ export default function TrackPlayer({ files }) {
     });
   }, [tracks]);
 
-  const handlePlay = (key) => {
-    console.log('Attempting to play:', key);
-    if (wavesurfers[key].current && tracks[key].ref.current) {
-      wavesurfers[key].current.load(tracks[key].ref.current.url);
-      wavesurfers[key].current.play();
-    } else {
-      console.error(`${key} WaveSurfer is not initialized or track not available`);
+  const handlePlayPause = () => {
+    Object.values(wavesurfers).forEach((wavesurfer) => {
+      if (wavesurfer.current) {
+        wavesurfer.current.playPause();
+      }
+    });
+    setIsPlaying((prevState) => !prevState);
+  };
+
+  const handleVolumeChange = (key, value) => {
+    if (wavesurfers[key].current) {
+      wavesurfers[key].current.setVolume(value / 100);
     }
   };
 
@@ -136,6 +140,17 @@ export default function TrackPlayer({ files }) {
             <Typography variant="h5" sx={titleStyle}>
               Bass
             </Typography>
+
+            <Slider
+              min={0}
+              max={100}
+              defaultValue={100}
+              aria-labelledby="volume-slider"
+              onChange={(e, value) => handleVolumeChange("bass", value)}
+              sx={{ width: 80, height: 2, marginLeft: '31px', marginRight: '30px'}}
+            />
+
+
             <div style={{ width: 'calc(100% - 100px)', display: 'flex', alignItems: 'center' }}>
               <div ref={waveformRefs.bass} style={{ width: '100%', height: '60px' }} />
               <Button
@@ -153,6 +168,17 @@ export default function TrackPlayer({ files }) {
             <Typography variant="h5" sx={titleStyle}>
               Drums
             </Typography>
+
+            <Slider
+              min={0}
+              max={100}
+              defaultValue={100}
+              aria-labelledby="volume-slider"
+              onChange={(e, value) => handleVolumeChange("drums", value)}
+              sx={{ width: 80, height: 2, marginLeft: '9px', marginRight: '30px'}}
+            />
+
+
             <div style={{ width: 'calc(100% - 100px)', display: 'flex', alignItems: 'center' }}>
               <div ref={waveformRefs.drums} style={{ width: '100%', height: '60px' }} />
               <Button
@@ -170,6 +196,17 @@ export default function TrackPlayer({ files }) {
             <Typography variant="h5" sx={titleStyle}>
               Vocals
             </Typography>
+
+            <Slider
+              min={0}
+              max={100}
+              defaultValue={100}
+              aria-labelledby="volume-slider"
+              onChange={(e, value) => handleVolumeChange("vocals", value)}
+              sx={{ width: 80, height: 2, marginLeft: '13px', marginRight: '30px'}}
+            />
+
+
             <div style={{ width: 'calc(100% - 100px)', display: 'flex', alignItems: 'center' }}>
               <div ref={waveformRefs.vocals} style={{ width: '100%', height: '60px' }} />
               <Button
@@ -187,6 +224,17 @@ export default function TrackPlayer({ files }) {
             <Typography variant="h5" sx={titleStyle}>
               Other
             </Typography>
+
+            <Slider
+              min={0}
+              max={100}
+              defaultValue={100}
+              aria-labelledby="volume-slider"
+              onChange={(e, value) => handleVolumeChange("other", value)}
+              sx={{ width: 80, height: 2, marginLeft: '18px', marginRight: '30px'}}
+            />
+
+
             <div style={{ width: 'calc(100% - 100px)', display: 'flex', alignItems: 'center' }}>
               <div ref={waveformRefs.other} style={{ width: '100%', height: '60px' }} />
               <Button
@@ -210,15 +258,10 @@ export default function TrackPlayer({ files }) {
 
         <Button
           variant="contained"
-          onClick={() => {
-            Object.values(wavesurfers).forEach((wavesurfer) => {
-              if (wavesurfer.current) {
-                wavesurfer.current.playPause();
-              }
-            });
-          }}
+          sx={{ width: '200px' }}
+          onClick={handlePlayPause}
         >
-          Play/Pause
+          {isPlaying ? <strong>𝗅𝗅</strong> : '▶'}
         </Button>
       </Container>
     </Box>
