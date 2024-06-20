@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
@@ -12,10 +12,10 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import { TextField } from '@mui/material';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 import { useCurrentUser } from '../App.js';
 import AppAppBarSignedIn from './AppAppBarSignedIn';
-import Button from '@mui/material/Button';
 
 const defaultTheme = createTheme({});
 
@@ -43,8 +43,7 @@ function ToggleCustomTheme({ showCustomTheme, toggleCustomTheme }) {
             pointerEvents: 'none',
           },
         }}
-      >
-      </ToggleButtonGroup>
+      />
     </Box>
   );
 }
@@ -56,12 +55,14 @@ ToggleCustomTheme.propTypes = {
 
 export default function BrowseSamples() {
   const currentUser = useCurrentUser();
-  const [mode, setMode] = React.useState('dark');
-  const [showCustomTheme, setShowCustomTheme] = React.useState(true);
+  const [mode, setMode] = useState('dark');
+  const [showCustomTheme, setShowCustomTheme] = useState(true);
   const LPtheme = createTheme(getLPTheme(mode));
-  const [samples, setSamples] = React.useState([]);
-  const [filteredSamples, setFilteredSamples] = React.useState([]);
-  const [searchQuery, setSearchQuery] = React.useState('');
+  const [samples, setSamples] = useState([]);
+  const [filteredSamples, setFilteredSamples] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [samplesPerPage] = useState(10);
 
   const toggleColorMode = () => {
     setMode((prev) => (prev === 'dark' ? 'light' : 'dark'));
@@ -71,7 +72,7 @@ export default function BrowseSamples() {
     setShowCustomTheme((prev) => !prev);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     window.scrollTo(0, 0);
     fetchSamples();
   }, []);
@@ -92,9 +93,8 @@ export default function BrowseSamples() {
     const { value } = event.target;
     setSearchQuery(value);
 
-  // Filter samples based on search query
-  const filtered = samples.filter((sample) =>
-    sample._id.toLowerCase().includes(value.toLowerCase())
+    const filtered = samples.filter((sample) =>
+      sample._id.toLowerCase().includes(value.toLowerCase())
     );
     setFilteredSamples(filtered);
   };
@@ -106,6 +106,18 @@ export default function BrowseSamples() {
     }
     return text;
   };
+
+  // Function to get current samples
+  const indexOfLastSample = currentPage * samplesPerPage;
+  const indexOfFirstSample = indexOfLastSample - samplesPerPage;
+  const currentSamples = filteredSamples.slice(indexOfFirstSample, indexOfLastSample);
+
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [currentPage]);
 
   return (
     <ThemeProvider theme={showCustomTheme ? LPtheme : defaultTheme}>
@@ -146,7 +158,7 @@ export default function BrowseSamples() {
           />
 
           <Grid container spacing={3}>
-            {filteredSamples.map((sample, index) => (
+            {currentSamples.map((sample, index) => (
               <Grid item xs={12} sm={6} key={index}>
                 <Paper
                   elevation={3}
@@ -191,6 +203,19 @@ export default function BrowseSamples() {
             ))}
           </Grid>
 
+          <Box sx={{ mt: 3, display: 'flex', justifyContent: 'center' }}>
+            {Array.from({ length: Math.ceil(filteredSamples.length / samplesPerPage) }, (_, index) => (
+              <Button
+                key={index}
+                onClick={() => paginate(index + 1)}
+                sx={{ mx: 1 }}
+                variant={currentPage === index + 1 ? 'contained' : 'outlined'}
+                color="primary"
+              >
+                {index + 1}
+              </Button>
+            ))}
+          </Box>
         </Container>
         <Footer />
       </Box>
