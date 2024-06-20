@@ -173,7 +173,6 @@ export default function BrowseSamples() {
                       color="primary"
                       size="small"
                       download
-                      style={{ marginLeft: '10px' }}
                     >
                       &#9825; Like
                     </Button>
@@ -183,7 +182,6 @@ export default function BrowseSamples() {
                       color="primary"
                       size="small"
                       download
-                      style={{ marginRight: '10px' }}
                     >
                       View Sample
                     </Button>
