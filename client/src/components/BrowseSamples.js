@@ -158,8 +158,8 @@ export default function BrowseSamples() {
           />
 
           <Grid container spacing={3}>
-            {currentSamples.map((sample, index) => (
-              <Grid item xs={12} sm={6} key={index}>
+            {currentSamples.length === 0 ? (
+              <Grid item xs={12}>
                 <Paper
                   elevation={3}
                   sx={{
@@ -173,34 +173,56 @@ export default function BrowseSamples() {
                     flexDirection: 'column',
                   }}
                 >
-                  <div>
-                    <Typography variant="h6" sx={{ textAlign: 'left', fontWeight: 'bold', mb: 1 }}>
-                      {limitCharacters(sample._id, 50)}
-                    </Typography>
-                  </div>
-
-                  <div style={{ marginTop: 'auto', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
-                    <Button
-                      variant="outlined"
-                      color="primary"
-                      size="small"
-                      download
-                    >
-                      &#9825; Like
-                    </Button>
-
-                    <Button
-                      variant="outlined"
-                      color="primary"
-                      size="small"
-                      download
-                    >
-                      View Sample
-                    </Button>
-                  </div>
+                  <Typography variant="h6" sx={{ textAlign: 'center', mb: 1, mt:7}}>
+                    No results found.
+                  </Typography>
                 </Paper>
               </Grid>
-            ))}
+            ) : (
+              currentSamples.map((sample, index) => (
+                <Grid item xs={12} sm={6} key={index}>
+                  <Paper
+                    elevation={3}
+                    sx={{
+                      padding: 2,
+                      textAlign: 'left',
+                      color: 'text.primary',
+                      backgroundColor: 'background.paper',
+                      borderRadius: 2,
+                      minHeight: '180px',
+                      display: 'flex',
+                      flexDirection: 'column',
+                    }}
+                  >
+                    <div>
+                      <Typography variant="h6" sx={{ textAlign: 'left', fontWeight: 'bold', mb: 1 }}>
+                        {limitCharacters(sample._id, 50)}
+                      </Typography>
+                    </div>
+
+                    <div style={{ marginTop: 'auto', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+                      <Button
+                        variant="outlined"
+                        color="primary"
+                        size="small"
+                        download
+                      >
+                        &#9825; Like
+                      </Button>
+
+                      <Button
+                        variant="outlined"
+                        color="primary"
+                        size="small"
+                        download
+                      >
+                        View Sample
+                      </Button>
+                    </div>
+                  </Paper>
+                </Grid>
+              ))
+            )}
           </Grid>
 
           <Box sx={{ mt: 3, display: 'flex', justifyContent: 'center' }}>
