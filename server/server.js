@@ -108,9 +108,12 @@ app.post('/upload', upload.single('audioFile'), (req, res) => {
         url: `http://localhost:5000/download?file=${encodeURIComponent(path.join(outputDir, file))}`
       }));
 
+      const originalFileUrl = `http://localhost:5000/download?file=${encodeURIComponent(file.path)}.wav`;
+
       // Save file information to the database
       try {
         const newFile = new fileModel({
+          original: originalFileUrl,
           convertedBass: filePaths.find((file) => file.name === 'bass.wav').url,
           convertedVocal: filePaths.find((file) => file.name === 'vocals.wav').url,
           convertedDrums: filePaths.find((file) => file.name === 'drums.wav').url,

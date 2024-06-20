@@ -4,6 +4,10 @@ const fileSchema = new mongoose.Schema({
     email: {
         type: String,
     },
+    original: {
+        type: String,
+        required: true
+    },
     convertedBass: {
         type: String,
         required: true
