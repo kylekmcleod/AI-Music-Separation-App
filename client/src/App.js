@@ -12,6 +12,7 @@ import Credits from './components/Credits';
 import Profile from './components/Profile';
 import Error404 from './components/Error404';
 import MySamples from './components/MySamples';
+import Track from './components/Track';
 
 const UserContext = createContext();
 
@@ -54,6 +55,7 @@ function App() {
           <Route path="/credits" element={<Credits />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/my-samples" element={<MySamples />} />
+          <Route path="/track/:id" element={<Track />} />
           <Route path="*" element={<Error404 />} />
         </Routes>
       </Router>
