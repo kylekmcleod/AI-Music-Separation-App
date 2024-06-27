@@ -118,7 +118,11 @@ export default function Footer() {
           >
             Privacy
           </Link>
-          <Link color="text.secondary" href="#">
+          <Link 
+            color="text.secondary" 
+            onClick={() => Navigate('/contact')}
+            href="#"
+            >
             Contact
           </Link>
         </Box>
