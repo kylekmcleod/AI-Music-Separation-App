@@ -287,6 +287,21 @@ app.get('/get-samples', async (req, res) => {
   }
 });
 
+// Get a single sample by ID
+app.get('/get-sample/:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    const file = await fileModel.findById(id);
+    if (!file) {
+      return res.status(404).json({ message: 'Sample not found' });
+    }
+    res.json(file);
+  } catch (error) {
+    console.error('Error getting sample:', error);
+    res.status(500).json({ message: 'Error getting sample', error: error.message });
+  }
+});
+
 // App listening
 app.listen(5000, () => {
   console.log('Server running on http://localhost:5000');
