@@ -214,7 +214,7 @@ export default function BrowseSamples() {
                         variant="outlined"
                         color="primary"
                         size="small"
-                        download
+                        href={`/track/${sample._id}`}
                       >
                         View Sample
                       </Button>
