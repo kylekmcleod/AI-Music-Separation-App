@@ -64,15 +64,13 @@ export default function Contact() {
     // Clear errors if validation passes
     setErrors({});
 
-    // Handle form submission (example using axios)
+    // Handle form submission
     axios.post('http://localhost:5000/contact', formData)
       .then(response => {
         console.log('Message sent:', response.data);
-        // Optionally, handle success (e.g., show confirmation to user)
       })
       .catch(error => {
         console.error('Error sending message:', error);
-        // Optionally, handle error (e.g., show error message to user)
       });
   };
 
