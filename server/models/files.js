@@ -4,6 +4,9 @@ const fileSchema = new mongoose.Schema({
     email: {
         type: String,
     },
+    fileName: {
+        type: String,
+    },
     original: {
         type: String,
         required: true

@@ -73,6 +73,7 @@ app.post('/upload', upload.single('audioFile'), (req, res) => {
   }
 
   const fileName = path.basename(file.path);
+  const originalFileName = file.originalname;
   console.log('Uploaded file name:', fileName);
 
   const outputDir = path.resolve(__dirname, 'outputs', fileName);
@@ -114,6 +115,7 @@ app.post('/upload', upload.single('audioFile'), (req, res) => {
       try {
         const newFile = new fileModel({
           original: originalFileUrl,
+          fileName: originalFileName,
           convertedBass: filePaths.find((file) => file.name === 'bass.wav').url,
           convertedVocal: filePaths.find((file) => file.name === 'vocals.wav').url,
           convertedDrums: filePaths.find((file) => file.name === 'drums.wav').url,
