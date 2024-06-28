@@ -16,6 +16,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useCurrentUser } from '../App.js';
 import AppAppBarSignedIn from './AppAppBarSignedIn';
+import WaveSurfer from 'wavesurfer.js';
 
 const defaultTheme = createTheme({});
 
@@ -101,6 +102,9 @@ export default function BrowseSamples() {
 
   // Function to limit the characters in sample ID
   const limitCharacters = (text, limit) => {
+    if (!text) {
+      return "Unnamed";
+    }
     if (text.length > limit) {
       return text.slice(0, limit) + '...';
     }
@@ -194,11 +198,14 @@ export default function BrowseSamples() {
                       flexDirection: 'column',
                     }}
                   >
+
                     <div>
                       <Typography variant="h6" sx={{ textAlign: 'left', fontWeight: 'bold', mb: 1 }}>
-                        {limitCharacters(sample._id, 50)}
+                        {limitCharacters(sample.fileName, 50)}
                       </Typography>
                     </div>
+
+                    
 
                     <div style={{ marginTop: 'auto', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
                       <Button
