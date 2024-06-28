@@ -205,8 +205,6 @@ export default function BrowseSamples() {
                       </Typography>
                     </div>
 
-                    
-
                     <div style={{ marginTop: 'auto', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
                       <Button
                         variant="outlined"
