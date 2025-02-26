@@ -1,5 +1,5 @@
 
-# AI-Powered Music Separator
+# Song Separator - AI-Powered Music Separator
 This is my personal project Song Separator. It is a web application that allows users to split any song into vocal, drum, instrument, and bass tracks. Music production inspired me to make a simple to use STEM track splitter that anyone can use.
 
 https://github.com/user-attachments/assets/69c081fe-f798-41d1-854b-c4dea1344b8d
